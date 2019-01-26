@@ -1,10 +1,19 @@
-stlFilePath:
-  - STLFiles/Moon.stl
+extractType: file
+extractConfiguration:
+  moon:
+    file: STLFiles/Moon.stl
 parseFormat: STL
-distanceMetric: euclidean
+
 statistics:
-  - area
   - count
   - box
-loadLocation:
-  - STDOUT
+  - area
+statisticsConf:
+  distanceMetric: euclidean
+loadType:
+  - stdout
+  - file
+
+loadConfiguration:
+  file:
+    moon: moonoutput.txt

@@ -1,10 +1,15 @@
-stlFilePath:
-  - STLFiles/Moon.stl
+extractType: db_mongo
+extractConfiguration:
+  moon:
+    file: STLFiles/simple.stl
 parseFormat: STL
-distanceMetric: euclidean
+distanceMetric: supremum
 statistics:
-  - area
   - count
-  - box
-loadLocation:
-  - STDOUT
+loadType:
+  - stdout
+  - file
+
+loadConfiguration:
+  file:
+    moon: moonoutput.txt

@@ -11,9 +11,6 @@ import java.util.Map;
 
 public class STLMain {
 
-    private static void run(){
-
-    }
 
     public static void main(String... args){
         Map<String, AbstractParser> parserMap = new HashMap<>();
