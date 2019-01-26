@@ -1,4 +1,12 @@
 package extract.parser;
 
-public class STLParser {
+import model.AbstractModel;
+import model.modelComponent.AbstractComponent;
+
+public class STLParser extends AbstractParser {
+
+    @Override
+    public void parse(String line) {
+
+    }
 }

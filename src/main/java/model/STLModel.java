@@ -1,4 +1,5 @@
 package model;
 
-public class STLModel {
+
+public class STLModel extends AbstractModel {
 }

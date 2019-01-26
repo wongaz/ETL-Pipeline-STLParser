@@ -1,0 +1,10 @@
+stlFilePath:
+  - STLFiles/Moon.stl
+parseFormat: STL
+distanceMetric: euclidean
+statistics:
+  - area
+  - count
+  - box
+loadLocation:
+  - STDOUT

@@ -1,13 +1,15 @@
 package extract;
 
-import extract.parser.IParser;
+import extract.parser.AbstractParser;
 import lombok.Data;
 import model.AbstractModel;
+
+import java.util.Map;
 
 @Data
 public abstract class AbstractExtracter {
 
-    private IParser parser;
+    private AbstractParser parser;
     private AbstractModel abstractModel;
 
 
@@ -15,9 +17,10 @@ public abstract class AbstractExtracter {
 
     }
 
-    public AbstractExtracter(IParser parser){
+    public AbstractExtracter(AbstractParser parser){
         this.parser = parser;
     }
 
+    public abstract void setExtractionMap(Map<String, String> extractionMap);
     public abstract boolean read();
 }
