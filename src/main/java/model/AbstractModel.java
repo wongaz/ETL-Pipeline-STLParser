@@ -11,9 +11,9 @@ import java.util.Map;
 @Data
 public abstract class AbstractModel {
 
-    List<AbstractComponent> components;
-    String modelName;
-    Map<String, Object> analysisMap;
+    private List<AbstractComponent> components;
+    private String modelName;
+    private Map<String, Object> analysisMap;
 
     public AbstractModel(){
         this.components = new ArrayList<>();

@@ -7,5 +7,4 @@ public class FacetComponent extends AbstractComponent{
         super(name, category);
     }
 
-
 }

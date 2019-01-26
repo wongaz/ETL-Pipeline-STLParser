@@ -10,7 +10,6 @@ import java.util.Map;
 public abstract class AbstractExtracter {
 
     private AbstractParser parser;
-    private AbstractModel abstractModel;
 
 
     public AbstractExtracter(){
@@ -19,6 +18,10 @@ public abstract class AbstractExtracter {
 
     public AbstractExtracter(AbstractParser parser){
         this.parser = parser;
+    }
+
+    public AbstractModel getModel(){
+        return parser.getModel();
     }
 
     public abstract void setExtractionMap(Map<String, String> extractionMap);

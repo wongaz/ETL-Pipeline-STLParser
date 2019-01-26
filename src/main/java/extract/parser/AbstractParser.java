@@ -1,7 +1,9 @@
 package extract.parser;
 
+import lombok.Data;
 import model.AbstractModel;
 
+@Data
 public abstract class AbstractParser {
 
     private AbstractModel model;

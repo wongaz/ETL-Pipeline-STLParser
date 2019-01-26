@@ -1,7 +1,7 @@
-extractType: File
+extractType: file
 extractConfiguration:
   moon:
-    directory: moon.stl
+    file: STLFiles/Moon.stl
 parseFormat: STL
 distanceMetric: euclidean
 statistics:

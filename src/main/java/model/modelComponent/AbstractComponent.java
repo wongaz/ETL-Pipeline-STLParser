@@ -21,7 +21,6 @@ public abstract class AbstractComponent {
 
     public void addVertice(Triple<Double, Double, Double> vertex){
         this.vertices.add(vertex);
-
     }
 
     public void setBasis(double ni, double nj, double nk){
@@ -30,7 +29,6 @@ public abstract class AbstractComponent {
 
     public void setCategory(String category){
         this.category = Type.valueOf(category);
-
     }
 
     public enum Type{
