@@ -4,10 +4,10 @@
 - Jackson Codr
 
 ## New Config File 
-- extractEndPointType: defines which type of endPoint to hit
+- extractType: defines which type of endPoint to hit
 - extractConfiguration: String-> Map-> string mapping. Used to define relative file path or in somecases DB 
 connection parameters
-- parseFormat: defines the string parser for the model
-- statistics: list defining which stats to use.
-- loadType: Final Phase of ETL pipeline
-- loadConfiguration: 
+- parseFormat: defines the string parser for the model to be built with respects
+- statistics: list defining which stats to use analysis to perform
+- loadType: defines the type of endpoints to using for the ETL pipeline
+- loadConfiguration: extra parameters for the loader. This could include but not limited to;
