@@ -1,12 +1,11 @@
 import config.AppConfig;
 import config.AppLoader;
-import extract.AbstractExtracter;
-import extract.FileExtracter;
+import extract.AbstractExtractor;
+import extract.FileExtractor;
 import extract.parser.AbstractParser;
 import extract.parser.STLParser;
-import model.AbstractModel;
+import model.Model;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,27 +19,29 @@ public class STLMain {
         Map<String, AbstractParser> parserMap = new HashMap<>();
         parserMap.put("STL", new STLParser());
 
-        Map<String, AbstractExtracter> extracterMap = new HashMap<>();
-        extracterMap.put("file", new FileExtracter());
+        Map<String, AbstractExtractor> extracterMap = new HashMap<>();
+        extracterMap.put("file", new FileExtractor());
 
         String conf = "configFiles/moon.yaml";
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);
         System.out.println(appConfig.toString());
 
-        AbstractExtracter selectedExtracter = extracterMap.get(appConfig.getExtractType());
+        AbstractExtractor selectedExtractor = extracterMap.get(appConfig.getExtractType());
         AbstractParser selectedParseStyle = parserMap.get(appConfig.getParseFormat());
 
-        selectedExtracter.setParser(selectedParseStyle);
+        selectedExtractor.setParser(selectedParseStyle);
         Map<String, Map<String,String>> extractConf =  appConfig.getExtractConfiguration();
-        Map<String, AbstractModel> modelMap = new HashMap<>();
+        Map<String, Model> modelMap = new HashMap<>();
 
         for (Map.Entry<String, Map<String, String>> entry : extractConf.entrySet()) {
             System.out.println(entry.getKey());
-            selectedExtracter.setExtractionMap(entry.getValue());
-            selectedExtracter.read();
-            modelMap.put(entry.getKey(),selectedExtracter.getModel());
+            selectedExtractor.setExtractionMap(entry.getKey(), entry.getValue());
+            selectedExtractor.read();
+            modelMap.put(entry.getKey(), selectedExtractor.getModel());
         }
+
+        modelMap.values().forEach(x -> System.out.println(x.toString()));
 
 
     }

@@ -1,7 +1,7 @@
 package load;
 
-import model.AbstractModel;
+import model.Model;
 
 public interface ILoader {
-    boolean load(AbstractModel abstractModel);
+    boolean load(Model model);
 }

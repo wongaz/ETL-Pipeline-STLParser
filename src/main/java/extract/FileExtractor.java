@@ -1,7 +1,6 @@
 package extract;
 
 import extract.parser.AbstractParser;
-import extract.parser.STLParser;
 import lombok.Data;
 
 import java.io.BufferedReader;
@@ -11,21 +10,22 @@ import java.io.IOException;
 import java.util.Map;
 
 @Data
-public class FileExtracter extends AbstractExtracter {
+public class FileExtractor extends AbstractExtractor {
 
     private String relativeFileDirectory;
 
-    public FileExtracter() {
+    public FileExtractor() {
 
     }
 
-    public FileExtracter(AbstractParser parser) {
+    public FileExtractor(AbstractParser parser) {
         super(parser);
     }
 
     @Override
-    public void setExtractionMap(Map<String, String> extractionMap) {
+    public void setExtractionMap(String name, Map<String, String> extractionMap) {
         this.relativeFileDirectory = extractionMap.get("file");
+        super.setNewModel(name);
     }
 
     @Override
