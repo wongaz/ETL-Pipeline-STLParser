@@ -4,7 +4,12 @@ This system uses many different built tools to make an ETL pipeline
 
 ## Dependencies  
 - Lombok: 1.18.4
-- Jackson Codr
+    - Used for maintaining POJO's and removing boilerplate code of getters and setters
+    default constructors
+- Jackson Code
+    - YAML file parsing, used to make runtime configurations for the ETL pipeline.
+
+
 
 ## New Config File 
 - extractType: defines which type of endPoint to hit

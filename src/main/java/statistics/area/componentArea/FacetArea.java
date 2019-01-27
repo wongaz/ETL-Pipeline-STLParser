@@ -1,17 +1,17 @@
 package statistics.area.componentArea;
 
 import org.apache.commons.lang3.tuple.Triple;
-import statistics.area.distanceMetric.EuclideanDistance;
-import statistics.area.distanceMetric.IMetric;
-import statistics.area.distanceMetric.ManhattanDistance;
-import statistics.area.distanceMetric.SupremumDistance;
+import statistics.area.componentArea.distanceMetric.EuclideanDistance;
+import statistics.area.componentArea.distanceMetric.IMetric;
+import statistics.area.componentArea.distanceMetric.ManhattanDistance;
+import statistics.area.componentArea.distanceMetric.SupremumDistance;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FacetArea implements IComponentArea {
-    static Map<String, IMetric> metricMap = new HashMap<>();
+    private static Map<String, IMetric> metricMap = new HashMap<>();
     static {
         metricMap.put("manhattan", new ManhattanDistance());
         metricMap.put("euclidean", new EuclideanDistance());
@@ -19,11 +19,12 @@ public class FacetArea implements IComponentArea {
     }
 
     /**
-     * Uses Herun's Formula for computing the triangle in 3 dimensional space.
+     * Uses Herun's Formula for computing a triangle's area with respects to distance
      *
-     * @param metric
-     * @param verticesList
-     * @return
+     *
+     * @param metric: what defines closeness.
+     * @param verticesList: List of vertices in the polygon
+     * @return double: representing that components area.
      */
     @Override
     public double computeArea(String metric, List<Triple<Double, Double, Double>> verticesList) {
@@ -36,6 +37,6 @@ public class FacetArea implements IComponentArea {
 
         double s = (a + b + c) / 2;
 
-        return Math.sqrt(s * (s - a) * (s - b) *(s-c));
+        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
     }
 }

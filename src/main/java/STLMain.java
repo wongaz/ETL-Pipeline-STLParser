@@ -4,6 +4,9 @@ import extract.AbstractExtractor;
 import extract.FileExtractor;
 import extract.parser.AbstractParser;
 import extract.parser.STLParser;
+import load.FileOutLoader;
+import load.ILoader;
+import load.StandardOutLoader;
 import model.Model;
 import statistics.IAnalysis;
 import statistics.area.SurfaceAreaAnalysis;
@@ -27,6 +30,11 @@ public class STLMain {
         analysisMap.put("count", new CountAnalysis());
         analysisMap.put("box", new BoxAnalysis());
         analysisMap.put("area", new SurfaceAreaAnalysis());
+
+        Map<String, ILoader> loaderMap = new HashMap<>();
+        loaderMap.put("stdout", new StandardOutLoader());
+        loaderMap.put("file", new FileOutLoader());
+
 
         String conf = "configFiles/moon.yaml";
 

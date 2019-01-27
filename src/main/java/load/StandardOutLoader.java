@@ -7,7 +7,12 @@ import java.util.Map;
 public class StandardOutLoader implements ILoader {
     @Override
     public boolean load(Model model) {
-        return false;
+        Map<String, ?> statsMap = model.getAnalysisMap();
+        if (statsMap == null) {
+            return false;
+        }
+        statsMap.forEach((x, y) -> System.out.println(x + ":" + y));
+        return true;
     }
 
     @Override

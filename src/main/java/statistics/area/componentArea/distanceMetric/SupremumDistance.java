@@ -1,4 +1,4 @@
-package statistics.area.distanceMetric;
+package statistics.area.componentArea.distanceMetric;
 
 
 import org.apache.commons.lang3.tuple.Triple;
