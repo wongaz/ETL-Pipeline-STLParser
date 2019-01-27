@@ -1,6 +1,7 @@
 package statistics.area;
 
 import model.Model;
+import model.modelComponent.AbstractComponent;
 import statistics.IAnalysis;
 import statistics.area.componentArea.FacetArea;
 import statistics.area.componentArea.IComponentArea;
@@ -18,6 +19,13 @@ public class SurfaceAreaAnalysis implements IAnalysis {
 
     @Override
     public void runAnalysis(Model model, Map<String, String> statisticsConf) {
-
+        String metric = statisticsConf.get("metric");
+        double surfaceArea = 0.0;
+        for (AbstractComponent component : model.getComponents()) {
+            IComponentArea componentArea = componentMap.get(component.getComponentName());
+            surfaceArea = surfaceArea + componentArea.computeArea(metric, component.getVertices());
+        }
+        model.addAnalysis("Surface Area", surfaceArea);
     }
+
 }

@@ -17,8 +17,24 @@ public class FacetArea implements IComponentArea {
         metricMap.put("euclidean", new EuclideanDistance());
         metricMap.put("supremum", new SupremumDistance());
     }
+
+    /**
+     * Uses Herun's Formula for computing the triangle in 3 dimensional space.
+     *
+     * @param metric
+     * @param verticesList
+     * @return
+     */
     @Override
     public double computeArea(String metric, List<Triple<Double, Double, Double>> verticesList) {
-        return 0;
+        IMetric selectedMetric = metricMap.get(metric);
+
+        double a = selectedMetric.calculateDistance(verticesList.get(0), verticesList.get(1));
+        double b = selectedMetric.calculateDistance(verticesList.get(0), verticesList.get(2));
+        double c = selectedMetric.calculateDistance(verticesList.get(1), verticesList.get(2));
+
+        double s = (a + b + c) / 3;
+
+        return Math.sqrt(s * (s - a) * (s - b) *(s-c));
     }
 }

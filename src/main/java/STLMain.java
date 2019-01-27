@@ -16,15 +16,14 @@ public class STLMain {
         Map<String, AbstractParser> parserMap = new HashMap<>();
         parserMap.put("STL", new STLParser());
 
-        Map<String, AbstractExtractor> extracterMap = new HashMap<>();
-        extracterMap.put("file", new FileExtractor());
+        Map<String, AbstractExtractor> extractorMap = new HashMap<>();
+        extractorMap.put("file", new FileExtractor());
 
         String conf = "configFiles/moon.yaml";
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);
-        System.out.println(appConfig.toString());
 
-        AbstractExtractor selectedExtractor = extracterMap.get(appConfig.getExtractType());
+        AbstractExtractor selectedExtractor = extractorMap.get(appConfig.getExtractType());
         AbstractParser selectedParseStyle = parserMap.get(appConfig.getParseFormat());
 
         selectedExtractor.setParser(selectedParseStyle);
@@ -32,7 +31,6 @@ public class STLMain {
         Map<String, Model> modelMap = new HashMap<>();
 
         for (Map.Entry<String, Map<String, String>> entry : extractConf.entrySet()) {
-            System.out.println(entry.getKey());
             selectedExtractor.setExtractionMap(entry.getKey(), entry.getValue());
             selectedExtractor.read();
             modelMap.put(entry.getKey(), selectedExtractor.getModel());
