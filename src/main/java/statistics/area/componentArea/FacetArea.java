@@ -27,13 +27,14 @@ public class FacetArea implements IComponentArea {
      */
     @Override
     public double computeArea(String metric, List<Triple<Double, Double, Double>> verticesList) {
+
         IMetric selectedMetric = metricMap.get(metric);
 
         double a = selectedMetric.calculateDistance(verticesList.get(0), verticesList.get(1));
         double b = selectedMetric.calculateDistance(verticesList.get(0), verticesList.get(2));
         double c = selectedMetric.calculateDistance(verticesList.get(1), verticesList.get(2));
 
-        double s = (a + b + c) / 3;
+        double s = (a + b + c) / 2;
 
         return Math.sqrt(s * (s - a) * (s - b) *(s-c));
     }

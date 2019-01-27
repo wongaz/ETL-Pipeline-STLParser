@@ -5,6 +5,10 @@ import extract.FileExtractor;
 import extract.parser.AbstractParser;
 import extract.parser.STLParser;
 import model.Model;
+import statistics.IAnalysis;
+import statistics.area.SurfaceAreaAnalysis;
+import statistics.box.BoxAnalysis;
+import statistics.count.CountAnalysis;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +22,11 @@ public class STLMain {
 
         Map<String, AbstractExtractor> extractorMap = new HashMap<>();
         extractorMap.put("file", new FileExtractor());
+
+        Map<String, IAnalysis> analysisMap = new HashMap<>();
+        analysisMap.put("count", new CountAnalysis());
+        analysisMap.put("box", new BoxAnalysis());
+        analysisMap.put("area", new SurfaceAreaAnalysis());
 
         String conf = "configFiles/moon.yaml";
 
@@ -36,7 +45,15 @@ public class STLMain {
             modelMap.put(entry.getKey(), selectedExtractor.getModel());
         }
 
-        modelMap.values().forEach(x -> System.out.println(x.toString()));
+        for (String statistic : appConfig.getStatistics()) {
+            for (Map.Entry<String, Model> modelEntry : modelMap.entrySet()) {
+                IAnalysis analysis = analysisMap.get(statistic);
+                Map<String, String> statisticConf = appConfig.getStatisticsConf();
+                analysis.runAnalysis(modelEntry.getValue(), statisticConf);
+            }
+        }
+
+        modelMap.values().forEach(x -> System.out.println(x.getAnalysisMap()));
 
 
     }

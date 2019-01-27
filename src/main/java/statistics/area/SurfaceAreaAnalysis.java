@@ -20,12 +20,14 @@ public class SurfaceAreaAnalysis implements IAnalysis {
     @Override
     public void runAnalysis(Model model, Map<String, String> statisticsConf) {
         String metric = statisticsConf.get("metric");
-        double surfaceArea = 0.0;
+        double totalSurfaceArea = 0.0;
         for (AbstractComponent component : model.getComponents()) {
             IComponentArea componentArea = componentMap.get(component.getComponentName());
-            surfaceArea = surfaceArea + componentArea.computeArea(metric, component.getVertices());
+            double surfaceArea = componentArea.computeArea(metric, component.getVertices());
+            double surfaceArea2 = componentArea.computeArea(metric, component.getVertices());
+            totalSurfaceArea = totalSurfaceArea + surfaceArea;
         }
-        model.addAnalysis("Surface Area", surfaceArea);
+        model.addAnalysis("Surface Area", totalSurfaceArea);
     }
 
 }

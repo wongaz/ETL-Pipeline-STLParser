@@ -8,7 +8,7 @@ statistics:
   - box
   - area
 statisticsConf:
-  distanceMetric: euclidean
+  metric: euclidean
 loadType:
   - stdout
   - file
