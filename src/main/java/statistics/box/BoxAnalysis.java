@@ -5,7 +5,7 @@ import statistics.IAnalysis;
 
 import java.util.Map;
 
-public class Box implements IAnalysis {
+public class BoxAnalysis implements IAnalysis {
     @Override
     public void runAnalysis(Model model, Map<String, String> statisticsConf) {
 
