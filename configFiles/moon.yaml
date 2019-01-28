@@ -1,5 +1,5 @@
 pipelineConfigs:
-  - # File 1
+  # File 1
   - pipelineName: moon
     extractType: file
     extractConfiguration:
@@ -17,7 +17,4 @@ pipelineConfigs:
     loadConf:
       file:
         filename: stloutput.txt
-
-  - pipelineName: moon
-
 

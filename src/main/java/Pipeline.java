@@ -17,8 +17,9 @@ public class Pipeline {
     private List<IAnalysis> statistics;
     private Map<String, String> statsConf;
     private List<ILoader> loaders;
-    private Map<String, String> loadConfiguration;
+    private Map<String, Map<String, String>> loadConfiguration;
     private Model model;
+
 
     private void extract() {
 
@@ -35,6 +36,5 @@ public class Pipeline {
     public void runPipeline() {
 
     }
-
 
 }

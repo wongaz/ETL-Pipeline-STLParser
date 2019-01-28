@@ -21,7 +21,6 @@ import java.util.Map;
 
 public class STLMain {
 
-
     public static void main(String... args){
         Map<String, AbstractParser> parserMap = new HashMap<>();
         parserMap.put("STL", new STLParser());
@@ -49,13 +48,36 @@ public class STLMain {
             Pipeline pipeline = new Pipeline();
             pipeline.setName(pipelineConfig.getPipelineName());
 
+            //Deep Copies
             String extract = pipelineConfig.getExtractType();
             pipeline.setExtractor((AbstractExtractor)
                     SerializationUtils.clone(extractorMap.get(extract)));
 
+            pipeline.setExtractorConf(pipelineConfig.getExtractConfiguration());
+
+            String parserName = pipelineConfig.getParseFormat();
+            pipeline.setParser((AbstractParser)
+                    SerializationUtils.clone(parserMap.get(parserName)));
+
+            List<IAnalysis> analyses = new ArrayList<>();
+            for (String statistic : pipelineConfig.getStatistics()) {
+                analyses.add((IAnalysis) SerializationUtils.clone(analysisMap.get(statistic)));
+            }
+            pipeline.setStatistics(analyses);
+
+            pipeline.setStatsConf(pipelineConfig.getStatisticsConf());
+
+            List<ILoader> loader = new ArrayList<>();
+            for (String loaderName : pipelineConfig.getLoadType()) {
+                loader.add((ILoader) SerializationUtils.clone(loaderMap.get(loaderName)));
+            }
+            pipeline.setLoaders(loader);
+            pipeline.setLoadConfiguration(pipelineConfig.getLoadConfiguration());
+
+            pipelines.add(pipeline);
 
         }
-
+        pipelines.forEach(x -> System.out.println(x.toString()));
         pipelines.forEach(Pipeline::runPipeline);
 
 //        AbstractExtractor selectedExtractor = extractorMap.get(appConfig.getExtractType());
