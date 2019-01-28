@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 public class ReflectionUtil {
-    public static Object makeObject(String name, Map<String, Class> ClassMap) {
+    protected static Object makeObject(String name, Map<String, Class> ClassMap) {
         Class<?> cls = ClassMap.get(name);
         try {
             return cls.getConstructor().newInstance();

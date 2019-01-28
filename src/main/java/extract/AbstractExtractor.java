@@ -29,6 +29,6 @@ public abstract class AbstractExtractor implements Serializable {
         parser.setNewModel(name);
     }
 
-    public abstract void setExtractionMap(String string, Map<String, String> extractionMap);
+    public abstract void setExtractionMap(Map<String, String> extractionMap);
     public abstract boolean read();
 }

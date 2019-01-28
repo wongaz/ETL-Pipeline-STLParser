@@ -10,7 +10,7 @@ import java.io.Serializable;
 public abstract class AbstractParser implements Serializable {
 
     protected AbstractComponent currentComponent;
-    private Model model;
+    private Model model = new Model();
 
     public void setNewModel() {
         this.model = new Model();

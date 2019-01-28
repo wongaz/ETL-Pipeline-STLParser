@@ -22,6 +22,10 @@ public class Pipeline {
 
 
     private void extract() {
+        this.extractor.setExtractionMap(this.extractorConf);
+        this.extractor.setParser(parser);
+        this.extractor.read();
+        this.model = this.extractor.getModel();
 
     }
 
@@ -34,6 +38,9 @@ public class Pipeline {
     }
 
     public void runPipeline() {
+        extract();
+        transform();
+        load();
 
     }
 

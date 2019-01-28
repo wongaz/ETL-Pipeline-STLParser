@@ -23,9 +23,8 @@ public class FileExtractor extends AbstractExtractor {
     }
 
     @Override
-    public void setExtractionMap(String name, Map<String, String> extractionMap) {
+    public void setExtractionMap(Map<String, String> extractionMap) {
         this.relativeFileDirectory = extractionMap.get("file");
-        super.setNewModel(name);
     }
 
     @Override

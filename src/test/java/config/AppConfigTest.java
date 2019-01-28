@@ -30,8 +30,7 @@ public class AppConfigTest {
 
     @Test
     public void testExtractType() {
-        Assert.assertEquals("db_mongo", appConfig1.getExtractType());
-        Assert.assertEquals("file", appConfig2.getExtractType());
+
     }
 
     @Test
@@ -41,7 +40,6 @@ public class AppConfigTest {
 
     @Test
     public void testParseFormat() {
-        Assert.assertEquals("STL", appConfig1.getParseFormat());
     }
 
     @Test
