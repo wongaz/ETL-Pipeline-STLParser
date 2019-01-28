@@ -22,20 +22,20 @@ import java.util.Map;
 public class STLMain {
 
     public static void main(String... args){
-        Map<String, AbstractParser> parserMap = new HashMap<>();
-        parserMap.put("STL", new STLParser());
+        Map<String, Class> extractorMap = new HashMap<>();
+        extractorMap.put("file", FileExtractor.class);
 
-        Map<String, AbstractExtractor> extractorMap = new HashMap<>();
-        extractorMap.put("file", new FileExtractor());
+        Map<String, Class> parserMap = new HashMap<>();
+        parserMap.put("STL", STLParser.class);
 
-        Map<String, IAnalysis> analysisMap = new HashMap<>();
-        analysisMap.put("count", new CountAnalysis());
-        analysisMap.put("box", new BoxAnalysis());
-        analysisMap.put("area", new SurfaceAreaAnalysis());
+        Map<String, Class> analysisMap = new HashMap<>();
+        analysisMap.put("count", SurfaceAreaAnalysis.class);
+        analysisMap.put("box", BoxAnalysis.class);
+        analysisMap.put("area", CountAnalysis.class);
 
-        Map<String, ILoader> loaderMap = new HashMap<>();
-        loaderMap.put("stdout", new StandardOutLoader());
-        loaderMap.put("file", new FileOutLoader());
+        Map<String, Class> loaderMap = new HashMap<>();
+        loaderMap.put("stdout", StandardOutLoader.class);
+        loaderMap.put("file", FileOutLoader.class);
 
 
         String conf = "configFiles/moon.yaml";

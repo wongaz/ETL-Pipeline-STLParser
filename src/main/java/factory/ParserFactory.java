@@ -15,7 +15,10 @@ public class ParserFactory {
     }
 
     public AbstractParser getAbstractParser(String parserName) {
-
+        Object obj = ReflectionUtil.makeObject(parserName, classMap);
+        if (obj != null) {
+            return (AbstractParser) obj;
+        }
         return null;
     }
 
