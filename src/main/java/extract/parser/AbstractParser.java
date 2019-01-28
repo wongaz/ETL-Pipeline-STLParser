@@ -4,8 +4,10 @@ import lombok.Data;
 import model.Model;
 import model.modelComponent.AbstractComponent;
 
+import java.io.Serializable;
+
 @Data
-public abstract class AbstractParser {
+public abstract class AbstractParser implements Serializable {
 
     protected AbstractComponent currentComponent;
     private Model model;

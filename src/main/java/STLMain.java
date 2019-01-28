@@ -1,5 +1,6 @@
 import config.AppConfig;
 import config.AppLoader;
+import config.PipelineConfig;
 import extract.AbstractExtractor;
 import extract.FileExtractor;
 import extract.parser.AbstractParser;
@@ -7,12 +8,15 @@ import extract.parser.STLParser;
 import load.FileOutLoader;
 import load.ILoader;
 import load.StandardOutLoader;
+import org.apache.commons.lang.SerializationUtils;
 import statistics.IAnalysis;
 import statistics.area.SurfaceAreaAnalysis;
 import statistics.box.BoxAnalysis;
 import statistics.count.CountAnalysis;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class STLMain {
@@ -39,6 +43,20 @@ public class STLMain {
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);
         System.out.println(appConfig);
+
+        List<Pipeline> pipelines = new ArrayList<>();
+        for (PipelineConfig pipelineConfig : appConfig.getPipelineConfigs()) {
+            Pipeline pipeline = new Pipeline();
+            pipeline.setName(pipelineConfig.getPipelineName());
+
+            String extract = pipelineConfig.getExtractType();
+            pipeline.setExtractor((AbstractExtractor)
+                    SerializationUtils.clone(extractorMap.get(extract)));
+
+
+        }
+
+        pipelines.forEach(Pipeline::runPipeline);
 
 //        AbstractExtractor selectedExtractor = extractorMap.get(appConfig.getExtractType());
 //        AbstractParser selectedParseStyle = parserMap.get(appConfig.getParseFormat());

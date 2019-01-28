@@ -4,10 +4,11 @@ import extract.parser.AbstractParser;
 import lombok.Data;
 import model.Model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 @Data
-public abstract class AbstractExtractor {
+public abstract class AbstractExtractor implements Serializable {
 
     private AbstractParser parser;
 

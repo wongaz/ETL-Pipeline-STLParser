@@ -3,8 +3,7 @@ pipelineConfigs:
   - pipelineName: moon
     extractType: file
     extractConfiguration:
-      file:
-        file: STLFiles/Moon.stl
+      file: STLFiles/Moon.stl
     parseFormat: STL
     statistics:
       - count
