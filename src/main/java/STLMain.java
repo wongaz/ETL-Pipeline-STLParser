@@ -7,11 +7,19 @@ import factory.AnalysisFactory;
 import factory.ExtractorFactory;
 import factory.LoaderFactory;
 import factory.ParserFactory;
+import factory.singletonFactory.ComponentAreaFactory;
+import factory.singletonFactory.DistanceMetricFactory;
 import load.FileOutLoader;
 import load.ILoader;
 import load.StandardOutLoader;
 import statistics.IAnalysis;
 import statistics.area.SurfaceAreaAnalysis;
+import statistics.area.componentArea.FacetArea;
+import statistics.area.componentArea.IComponentArea;
+import statistics.area.componentArea.distanceMetric.EuclideanDistance;
+import statistics.area.componentArea.distanceMetric.IMetric;
+import statistics.area.componentArea.distanceMetric.ManhattanDistance;
+import statistics.area.componentArea.distanceMetric.SupremumDistance;
 import statistics.box.BoxAnalysis;
 import statistics.count.CountAnalysis;
 
@@ -41,6 +49,17 @@ public class STLMain {
         loaderMap.put("stdout", StandardOutLoader.class);
         loaderMap.put("file", FileOutLoader.class);
         LoaderFactory loaderFactory = new LoaderFactory(loaderMap);
+
+        Map<String, IMetric> metricMap = new HashMap<>();
+        metricMap.put("manhattan", new ManhattanDistance());
+        metricMap.put("euclidean", new EuclideanDistance());
+        metricMap.put("supremum", new SupremumDistance());
+        DistanceMetricFactory.getInstance().setClassMap(metricMap);
+
+
+        Map<String, IComponentArea> componentMap = new HashMap<>();
+        componentMap.put("facet", new FacetArea());
+        ComponentAreaFactory.getInstance().setClassMap(componentMap);
 
 
         String conf = "configFiles/moon.yaml";
