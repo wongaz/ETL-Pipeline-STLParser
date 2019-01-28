@@ -1,12 +1,11 @@
 package factory.singletonFactory;
 
-import factory.ReflectionUtil;
 import statistics.area.componentArea.IComponentArea;
 
 import java.util.Map;
 
 public class ComponentAreaFactory {
-    private static Map<String, Class> classMap;
+    private static Map<String, IComponentArea> classMap;
     private static ComponentAreaFactory factory;
 
     public static ComponentAreaFactory getInstance() {
@@ -16,15 +15,11 @@ public class ComponentAreaFactory {
         return factory;
     }
 
-    public void setClassMap(Map<String, Class> map) {
+    public void setClassMap(Map<String, IComponentArea> map) {
         classMap = map;
     }
 
     public IComponentArea getComponentArea(String componentName) {
-        Object obj = ReflectionUtil.makeObject(componentName, classMap);
-        if (obj != null) {
-            return (IComponentArea) obj;
-        }
-        return null;
+        return classMap.get(componentName);
     }
 }

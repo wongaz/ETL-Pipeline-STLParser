@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 public class BoxAnalysis implements IAnalysis {
 
+    @SuppressWarnings("Duplicates")
     @Override
     public void runAnalysis(Model model, Map<String, String> statisticsConf) {
         List<AbstractComponent> components = model.getComponents();
