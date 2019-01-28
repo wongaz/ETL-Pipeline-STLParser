@@ -20,6 +20,9 @@ public class SurfaceAreaAnalysis implements IAnalysis {
     @Override
     public void runAnalysis(Model model, Map<String, String> statisticsConf) {
         String metric = statisticsConf.get("metric");
+        if (metric == null) {
+            metric = "euclidean";
+        }
         double totalSurfaceArea = 0.0;
         for (AbstractComponent component : model.getComponents()) {
             IComponentArea componentArea = componentMap.get(component.getComponentName());

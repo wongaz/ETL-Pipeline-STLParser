@@ -7,7 +7,6 @@ import extract.parser.STLParser;
 import load.FileOutLoader;
 import load.ILoader;
 import load.StandardOutLoader;
-import model.Model;
 import statistics.IAnalysis;
 import statistics.area.SurfaceAreaAnalysis;
 import statistics.box.BoxAnalysis;
@@ -39,30 +38,37 @@ public class STLMain {
         String conf = "configFiles/moon.yaml";
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);
+        System.out.println(appConfig);
 
-        AbstractExtractor selectedExtractor = extractorMap.get(appConfig.getExtractType());
-        AbstractParser selectedParseStyle = parserMap.get(appConfig.getParseFormat());
-
-        selectedExtractor.setParser(selectedParseStyle);
-        Map<String, Map<String,String>> extractConf =  appConfig.getExtractConfiguration();
-        Map<String, Model> modelMap = new HashMap<>();
-
-        for (Map.Entry<String, Map<String, String>> entry : extractConf.entrySet()) {
-            selectedExtractor.setExtractionMap(entry.getKey(), entry.getValue());
-            selectedExtractor.read();
-            modelMap.put(entry.getKey(), selectedExtractor.getModel());
-        }
-
-        for (String statistic : appConfig.getStatistics()) {
-            for (Map.Entry<String, Model> modelEntry : modelMap.entrySet()) {
-                IAnalysis analysis = analysisMap.get(statistic);
-                Map<String, String> statisticConf = appConfig.getStatisticsConf();
-                analysis.runAnalysis(modelEntry.getValue(), statisticConf);
-            }
-        }
-
-        modelMap.values().forEach(x -> System.out.println(x.getAnalysisMap()));
-
+//        AbstractExtractor selectedExtractor = extractorMap.get(appConfig.getExtractType());
+//        AbstractParser selectedParseStyle = parserMap.get(appConfig.getParseFormat());
+//
+//        selectedExtractor.setParser(selectedParseStyle);
+//        Map<String, Map<String,String>> extractConf =  appConfig.getExtractConfiguration();
+//        Map<String, Model> modelMap = new HashMap<>();
+//
+//        for (Map.Entry<String, Map<String, String>> entry : extractConf.entrySet()) {
+//            selectedExtractor.setExtractionMap(entry.getKey(), entry.getValue());
+//            selectedExtractor.read();
+//            modelMap.put(entry.getKey(), selectedExtractor.getModel());
+//        }
+//
+//        for (String statistic : appConfig.getStatistics()) {
+//            for (Map.Entry<String, Model> modelEntry : modelMap.entrySet()) {
+//                IAnalysis analysis = analysisMap.get(statistic);
+//                Map<String, String> statisticConf = appConfig.getStatisticsConf();
+//                analysis.runAnalysis(modelEntry.getValue(), statisticConf);
+//            }
+//        }
+//
+//        modelMap.values().forEach(x -> System.out.println(x.getAnalysisMap()));
+//
+//        String[] stringArray = appConfig.getLoadType();
+//        for (String s : stringArray) {
+//            ILoader loader = loaderMap.get(s);
+//            loader.setOutConfigurations(appConfig.getLoadConfiguration().get(s));
+//            loader.load(modelMap.get("Moon"));
+//        }
 
     }
 }

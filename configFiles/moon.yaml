@@ -1,15 +1,24 @@
-extractType: file
-extractConfiguration:
-  moon:
-    file: STLFiles/Moon.stl
-parseFormat: STL
-statistics:
-  - count
-  - box
-  - area
-statisticsConf:
-  metric: euclidean
-loadType:
-  - stdout
-  - file
+pipelineConfigs:
+  - # File 1
+  - pipelineName: moon
+    extractType: file
+    extractConfiguration:
+      file:
+        file: STLFiles/Moon.stl
+    parseFormat: STL
+    statistics:
+      - count
+      - box
+      - area
+    statisticsConf:
+      metric: euclidean
+    loadType:
+      - stdout
+      - file
+    loadConf:
+      file:
+        filename: stloutput.txt
+
+  - pipelineName: moon
+
 
