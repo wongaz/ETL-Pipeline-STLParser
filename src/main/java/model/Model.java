@@ -3,10 +3,7 @@ package model;
 import lombok.Data;
 import model.modelComponent.AbstractComponent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Data
 public class Model {
@@ -17,7 +14,7 @@ public class Model {
 
     public Model() {
         this.components = new ArrayList<>();
-        this.analysisMap = new HashMap<>();
+        this.analysisMap = new LinkedHashMap<>();
     }
 
     public Model(String string) {

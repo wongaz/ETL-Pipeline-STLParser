@@ -98,7 +98,7 @@ public class STLMain {
             pipelines.add(pipeline);
         }
 
-        //pipelines.forEach(x -> System.out.println(x.toString()));
+        pipelines.forEach(x -> System.out.println(x.toString()));
         pipelines.forEach(Pipeline::runPipeline);
     }
 }

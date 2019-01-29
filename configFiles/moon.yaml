@@ -1,9 +1,27 @@
 pipelineConfigs:
-  # File 1
+  # File 1: moon
   - pipelineName: moon
     extractType: file
     extractConfiguration:
       file: STLFiles/Moon.stl
+    parseFormat: STL
+    statistics:
+      - count
+      - box
+      - area
+    statisticsConf:
+      metric: euclidean
+    loadType:
+      - stdout
+      - file
+    loadConf:
+      file:
+        filename: stloutput.txt
+  # Simple
+  - pipelineName: simple
+    extractType: file
+    extractConfiguration:
+      file: STLFiles/simple.stl
     parseFormat: STL
     statistics:
       - count
