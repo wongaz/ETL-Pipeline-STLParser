@@ -13,7 +13,7 @@ public class STLParser extends AbstractParser {
         String[] word = line.split(" ");
         switch (word[0]) {
             case "solid":
-                System.out.println(word[1]);
+                //System.out.println(word[1]);
                 break;
             case "facet":
                 String type = word[1].toUpperCase();

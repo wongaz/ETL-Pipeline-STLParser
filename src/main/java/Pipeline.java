@@ -16,7 +16,7 @@ public class Pipeline {
     private AbstractParser parser;
     private List<IAnalysis> statistics;
     private Map<String, String> statsConf;
-    private List<ILoader> loaders;
+    private Map<String, ILoader> loaders;
     private Map<String, Map<String, String>> loadConfiguration;
     private Model model;
 
@@ -26,14 +26,21 @@ public class Pipeline {
         this.extractor.setParser(parser);
         this.extractor.read();
         this.model = this.extractor.getModel();
-
     }
 
     private void transform() {
-
+        statistics.forEach(x -> {
+            x.runAnalysis(this.model, this.statsConf);
+        });
     }
 
     private void load() {
+        this.loaders.entrySet().forEach(x -> {
+            Map<String, String> loadConf = this.loadConfiguration.get(x.getKey());
+            ILoader currentLoader = x.getValue();
+            currentLoader.setOutConfigurations(loadConf);
+            currentLoader.load(this.model);
+        });
 
     }
 

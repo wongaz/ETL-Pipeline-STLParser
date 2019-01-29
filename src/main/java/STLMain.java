@@ -65,7 +65,7 @@ public class STLMain {
         String conf = "configFiles/moon.yaml";
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);
-        System.out.println(appConfig);
+        //System.out.println(appConfig);
 
         List<Pipeline> pipelines = new ArrayList<>();
         for (PipelineConfig pipelineConfig : appConfig.getPipelineConfigs()) {
@@ -88,18 +88,17 @@ public class STLMain {
 
             pipeline.setStatsConf(pipelineConfig.getStatisticsConf());
 
-            List<ILoader> loader = new ArrayList<>();
+            Map<String, ILoader> loaders = new HashMap<>();
             for (String loaderName : pipelineConfig.getLoadType()) {
-                loader.add(loaderFactory.getLoader(loaderName));
+                loaders.put(loaderName, loaderFactory.getLoader(loaderName));
             }
-            pipeline.setLoaders(loader);
+            pipeline.setLoaders(loaders);
 
-            pipeline.setLoadConfiguration(pipelineConfig.getLoadConfiguration());
+            pipeline.setLoadConfiguration(pipelineConfig.getLoadConf());
             pipelines.add(pipeline);
-
         }
 
-        pipelines.forEach(x -> System.out.println(x.toString()));
+        //pipelines.forEach(x -> System.out.println(x.toString()));
         pipelines.forEach(Pipeline::runPipeline);
     }
 }
