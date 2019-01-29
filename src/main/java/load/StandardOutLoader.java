@@ -11,7 +11,7 @@ public class StandardOutLoader implements ILoader {
         if (statsMap == null) {
             return false;
         }
-        statsMap.forEach((x, y) -> System.out.println(x + ":" + y));
+        statsMap.forEach((x, y) -> System.out.println(x + ": " + y));
         return true;
     }
 
