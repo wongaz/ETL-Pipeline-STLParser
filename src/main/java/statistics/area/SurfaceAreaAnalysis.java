@@ -3,6 +3,7 @@ package statistics.area;
 import factory.singletonFactory.ComponentAreaFactory;
 import model.Model;
 import model.modelComponent.AbstractComponent;
+import org.apache.commons.lang3.tuple.Pair;
 import statistics.IAnalysis;
 import statistics.area.componentArea.IComponentArea;
 
@@ -12,7 +13,7 @@ public class SurfaceAreaAnalysis implements IAnalysis {
 
 
     @Override
-    public void runAnalysis(Model model, Map<String, String> statisticsConf) {
+    public Pair<String, Object> runAnalysis(Model model, Map<String, String> statisticsConf) {
         String metric = statisticsConf.get("metric");
         if (metric == null) {
             metric = "euclidean";
@@ -24,7 +25,7 @@ public class SurfaceAreaAnalysis implements IAnalysis {
             double surfaceArea = componentArea.computeArea(metric, component.getVertices());
             totalSurfaceArea = totalSurfaceArea + surfaceArea;
         }
-        model.addAnalysis("Surface Area", totalSurfaceArea);
+        return Pair.of("Surface Area", totalSurfaceArea);
     }
 
 }

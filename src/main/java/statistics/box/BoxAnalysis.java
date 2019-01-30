@@ -2,6 +2,7 @@ package statistics.box;
 
 import model.Model;
 import model.modelComponent.AbstractComponent;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import statistics.IAnalysis;
 
@@ -15,7 +16,7 @@ public class BoxAnalysis implements IAnalysis {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public void runAnalysis(Model model, Map<String, String> statisticsConf) {
+    public Pair<String, Object> runAnalysis(Model model, Map<String, String> statisticsConf) {
         List<AbstractComponent> components = model.getComponents();
         List<Triple<Double, Double, Double>> vertices = components
                 .stream()
@@ -49,6 +50,6 @@ public class BoxAnalysis implements IAnalysis {
         box.add(Triple.of(xMax, yMax, zMin));
         box.add(Triple.of(xMax, yMax, zMax));
 
-        model.addAnalysis("Box", box);
+        return Pair.of("Box", box);
     }
 }

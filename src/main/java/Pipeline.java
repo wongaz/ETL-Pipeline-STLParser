@@ -3,6 +3,7 @@ import extract.parser.AbstractParser;
 import load.ILoader;
 import lombok.Data;
 import model.Model;
+import org.apache.commons.lang3.tuple.Pair;
 import statistics.IAnalysis;
 
 import java.util.List;
@@ -30,7 +31,8 @@ public class Pipeline {
 
     private void transform() {
         statistics.forEach(x -> {
-            x.runAnalysis(this.model, this.statsConf);
+            Pair<String, ?> tuple = x.runAnalysis(this.model, this.statsConf);
+            this.model.addAnalysis(tuple.getLeft(), tuple.getRight());
         });
     }
 
