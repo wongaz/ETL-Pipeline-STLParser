@@ -1,0 +1,59 @@
+{
+  "components": [
+    {
+      "componentName": "facet",
+      "basis": {
+        "left": 0.0,
+        "middle": 0.0,
+        "right": 0.0
+      },
+      "vertices": [
+        {
+          "left": 0.0,
+          "middle": 0.0,
+          "right": 0.0
+        },
+        {
+          "left": 1.0,
+          "middle": 0.0,
+          "right": 0.0
+        },
+        {
+          "left": 1.0,
+          "middle": 1.0,
+          "right": 1.0
+        }
+      ],
+      "category": "NORMAL"
+    },
+    {
+      "componentName": "facet",
+      "basis": {
+        "left": 0.0,
+        "middle": 0.0,
+        "right": 0.0
+      },
+      "vertices": [
+        {
+          "left": 0.0,
+          "middle": 0.0,
+          "right": 0.0
+        },
+        {
+          "left": 0.0,
+          "middle": 1.0,
+          "right": 1.0
+        },
+        {
+          "left": 1.0,
+          "middle": 1.0,
+          "right": 1.0
+        }
+      ],
+      "category": "NORMAL"
+    }
+  ],
+  "modelName": null,
+  "analysisMap": {
+  }
+}

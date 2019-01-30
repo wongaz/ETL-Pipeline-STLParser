@@ -1,4 +1,5 @@
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import extract.AbstractExtractor;
 import extract.parser.AbstractParser;
 import load.ILoader;
@@ -31,8 +32,16 @@ public class Pipeline {
     }
 
     private void toGson() {
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(this.model));
+        //Gson gson = new Gson();
+        //System.out.println(gson.toJson(this.model));
+        ObjectMapper objectMapper = new ObjectMapper();
+        String serialized = null;
+        try {
+            serialized = objectMapper.writeValueAsString(this.model);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(serialized);
         System.out.println(this.model);
 
     }
