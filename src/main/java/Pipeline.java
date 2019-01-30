@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import extract.AbstractExtractor;
 import extract.parser.AbstractParser;
 import load.ILoader;
@@ -29,6 +30,13 @@ public class Pipeline {
         this.model = this.extractor.getModel();
     }
 
+    private void toGson() {
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(this.model));
+        System.out.println(this.model);
+
+    }
+
     private void transform() {
         statistics.forEach(x -> {
             Pair<String, ?> tuple = x.runAnalysis(this.model, this.statsConf);
@@ -48,6 +56,7 @@ public class Pipeline {
 
     public void runPipeline() {
         extract();
+        toGson();
         transform();
         load();
 
