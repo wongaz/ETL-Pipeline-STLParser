@@ -1,12 +1,16 @@
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import config.AppConfig;
 import config.AppLoader;
 import config.PipelineConfig;
+import module.LoaderModule;
 import extract.FileExtractor;
 import extract.parser.STLParser;
 import factory.AnalysisFactory;
 import factory.ExtractorFactory;
 import factory.LoaderFactory;
 import factory.ParserFactory;
+import factory.guice.GuiceLoaderFactory;
 import factory.singletonFactory.ComponentAreaFactory;
 import factory.singletonFactory.DistanceMetricFactory;
 import load.FileOutLoader;
@@ -31,6 +35,7 @@ import java.util.Map;
 public class STLMain {
 
     public static void main(String... args){
+
         Map<String, Class> extractorMap = new HashMap<>();
         extractorMap.put("file", FileExtractor.class);
         ExtractorFactory extractorFactory = new ExtractorFactory(extractorMap);
@@ -61,7 +66,9 @@ public class STLMain {
         componentMap.put("facet", new FacetArea());
         ComponentAreaFactory.getInstance().setClassMap(componentMap);
 
-
+        Injector injector = Guice.createInjector(new LoaderModule());
+        GuiceLoaderFactory guiceLoaderFactory = injector.getInstance(GuiceLoaderFactory.class);
+        System.out.println(guiceLoaderFactory.toString());
         String conf = "configFiles/moon.yaml";
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);

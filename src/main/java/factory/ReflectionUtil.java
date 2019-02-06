@@ -4,13 +4,26 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 public class ReflectionUtil {
-    protected static Object makeObject(String name, Map<String, Class> ClassMap) {
+    public static Object makeObject(String name, Map<String, Class> ClassMap) {
         Class<?> cls = ClassMap.get(name);
         try {
             return cls.getConstructor().newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object makeObject(Class<?> classObject){
+        try {
+            return classObject.getConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
