@@ -10,7 +10,7 @@ public class LoaderModule extends AbstractModule {
     @Override
     protected void configure() {
         MapBinder<String, ILoader> mapBinder = MapBinder.newMapBinder(binder(), String.class, ILoader.class);
-        mapBinder.addBinding("something").to(FileOutLoader.class);
-        mapBinder.addBinding("keyB").to(StandardOutLoader.class);
+        mapBinder.addBinding("file").to(FileOutLoader.class);
+        mapBinder.addBinding("stdout").to(StandardOutLoader.class);
     }
 }

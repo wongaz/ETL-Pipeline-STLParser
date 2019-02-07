@@ -68,7 +68,7 @@ public class STLMain {
 
         Injector injector = Guice.createInjector(new LoaderModule());
         GuiceLoaderFactory guiceLoaderFactory = injector.getInstance(GuiceLoaderFactory.class);
-        System.out.println(guiceLoaderFactory.toString());
+
         String conf = "configFiles/moon.yaml";
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);
