@@ -13,12 +13,12 @@ public class AppConfigTest {
     public static void setUp(){
         InputStream stream1 = Thread.currentThread()
                 .getContextClassLoader()
-                .getResourceAsStream("test.yaml");
+                .getResourceAsStream("configFiles/test.yaml");
         appConfig1 = AppLoader.loadConfiguration(stream1);
 
         InputStream stream2= Thread.currentThread()
                 .getContextClassLoader()
-                .getResourceAsStream("sample.yaml");
+                .getResourceAsStream("configFiles/sample.yaml");
         appConfig2 = AppLoader.loadConfiguration(stream2);
     }
 
