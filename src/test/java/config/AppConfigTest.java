@@ -25,7 +25,7 @@ public class AppConfigTest {
 
         InputStream stream3= Thread.currentThread()
                 .getContextClassLoader()
-                .getResourceAsStream("configFiles/2Pipes.yaml");
+                .getResourceAsStream("configFiles/2pipes.yaml");
         nPipeConfig = AppLoader.loadConfiguration(stream3);
     }
 
@@ -67,19 +67,6 @@ public class AppConfigTest {
     public void testParseFormat() {
         Assert.assertEquals("STL", moonPipeline.getParseFormat());
         Assert.assertEquals("STL", samplePipeline.getParseFormat());
-
-    }
-
-    @Test
-    public void testLoadType() {
-        Assert.assertEquals("STL", moonPipeline.getParseFormat());
-        Assert.assertEquals("STL", samplePipeline.getParseFormat());
-
-    }
-
-    @Test
-    public void testLoadConfiguration() {
-
     }
 
 

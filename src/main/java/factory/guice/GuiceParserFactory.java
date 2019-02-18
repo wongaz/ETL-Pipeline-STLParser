@@ -1,5 +1,6 @@
 package factory.guice;
 
+import com.google.inject.Inject;
 import extract.parser.AbstractParser;
 import factory.ReflectionUtil;
 import lombok.Data;
@@ -10,7 +11,7 @@ import java.util.Map;
 public class GuiceParserFactory {
     private Map<String, Class> classMap;
 
-
+    @Inject
     public GuiceParserFactory(Map<String, Class> map) {
         classMap = map;
     }
