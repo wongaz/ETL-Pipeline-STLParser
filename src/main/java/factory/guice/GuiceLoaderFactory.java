@@ -17,8 +17,12 @@ public class GuiceLoaderFactory {
         this.classMap = map;
     }
 
-    public ILoader getLoader(String loader) {
-        Object obj = ReflectionUtil.makeObject(classMap.get(loader).getClass());
+    public ILoader getLoader(String loaderName) throws NullPointerException {
+        ILoader loader = classMap.get(loaderName);
+        if (loader == null) {
+            throw new NullPointerException();
+        }
+        Object obj = ReflectionUtil.makeObject(loader.getClass());
         if (obj != null) {
             return (ILoader) obj;
         }

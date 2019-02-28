@@ -14,8 +14,13 @@ public class GuiceExtractorFactory {
         classMap = map;
     }
 
-    public AbstractExtractor getExtractor(String extractorName) {
-        Object obj = ReflectionUtil.makeObject(classMap.get(extractorName).getClass());
+    public AbstractExtractor getExtractor(String extractorName) throws NullPointerException {
+
+        AbstractExtractor extractor = classMap.get(extractorName);
+        if (extractor == null) {
+            throw new NullPointerException();
+        }
+        Object obj = ReflectionUtil.makeObject(extractor.getClass());
         if (obj != null) {
             return (AbstractExtractor) obj;
         }

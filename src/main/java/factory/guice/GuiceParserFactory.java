@@ -9,15 +9,19 @@ import java.util.Map;
 
 @Data
 public class GuiceParserFactory {
-    private Map<String, Class> classMap;
+    private Map<String, AbstractParser> classMap;
 
     @Inject
-    public GuiceParserFactory(Map<String, Class> map) {
+    public GuiceParserFactory(Map<String, AbstractParser> map) {
         classMap = map;
     }
 
-    public AbstractParser getAbstractParser(String parserName) {
-        Object obj = ReflectionUtil.makeObject(parserName, classMap);
+    public AbstractParser getAbstractParser(String parserName) throws NullPointerException {
+        AbstractParser parser = classMap.get(parserName);
+        if (parser == null) {
+            throw new NullPointerException();
+        }
+        Object obj = ReflectionUtil.makeObject(parser.getClass());
         if (obj != null) {
             return (AbstractParser) obj;
         }

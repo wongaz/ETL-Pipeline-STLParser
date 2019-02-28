@@ -9,15 +9,20 @@ import java.util.Map;
 
 @ToString
 public class GuiceAnalysisFactory {
-    private Map<String, Class> classMap;
+    private Map<String, IAnalysis> classMap;
 
     @Inject
-    public GuiceAnalysisFactory(Map<String, Class> map) {
+    public GuiceAnalysisFactory(Map<String, IAnalysis> map) {
         classMap = map;
     }
 
-    public IAnalysis getAnalysis(String analysisName) {
-        Object obj = ReflectionUtil.makeObject(analysisName, classMap);
+    public IAnalysis getAnalysis(String analysisName) throws NullPointerException {
+        IAnalysis analysis = classMap.get(analysisName);
+        if (analysis == null) {
+            throw new NullPointerException();
+        }
+
+        Object obj = ReflectionUtil.makeObject(analysis.getClass());
         if (obj != null) {
             return (IAnalysis) obj;
         }
