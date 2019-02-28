@@ -9,11 +9,14 @@ import java.util.Map;
 public class AnalysisFactory {
     private Map<String, Class> classMap;
 
+    public AnalysisFactory() {
+    }
+
     public AnalysisFactory(Map<String, Class> map) {
         classMap = map;
     }
 
-    public IAnalysis getAnalysis(String analysisName) {
+    public IAnalysis getAnalysis(String analysisName) throws NullPointerException {
         Object obj = ReflectionUtil.makeObject(analysisName, classMap);
         if (obj != null) {
             return (IAnalysis) obj;

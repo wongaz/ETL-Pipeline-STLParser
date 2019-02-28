@@ -9,6 +9,8 @@ import java.util.Map;
 public class ParserFactory {
     private Map<String, Class> classMap;
 
+    public ParserFactory() {
+    }
 
     public ParserFactory(Map<String, Class> map) {
         classMap = map;

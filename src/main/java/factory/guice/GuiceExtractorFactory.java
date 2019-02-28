@@ -2,11 +2,14 @@ package factory.guice;
 
 import com.google.inject.Inject;
 import extract.AbstractExtractor;
+import factory.ExtractorFactory;
 import factory.ReflectionUtil;
+import lombok.ToString;
 
 import java.util.Map;
 
-public class GuiceExtractorFactory {
+@ToString
+public class GuiceExtractorFactory extends ExtractorFactory {
     private Map<String, AbstractExtractor> classMap;
 
     @Inject
@@ -14,6 +17,7 @@ public class GuiceExtractorFactory {
         classMap = map;
     }
 
+    @Override
     public AbstractExtractor getExtractor(String extractorName) throws NullPointerException {
 
         AbstractExtractor extractor = classMap.get(extractorName);

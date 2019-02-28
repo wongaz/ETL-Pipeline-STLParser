@@ -4,8 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 public class ReflectionUtil {
-    public static Object makeObject(String name, Map<String, Class> ClassMap) {
+    public static Object makeObject(String name, Map<String, Class> ClassMap) throws NullPointerException {
         Class<?> cls = ClassMap.get(name);
+        if (cls == null) throw new NullPointerException();
         try {
             return cls.getConstructor().newInstance();
         } catch (InstantiationException e) {

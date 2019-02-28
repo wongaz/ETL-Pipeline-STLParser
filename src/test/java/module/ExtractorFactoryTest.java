@@ -29,4 +29,5 @@ public class ExtractorFactoryTest {
         Assert.assertTrue(object instanceof FileExtractor);
         Assert.assertTrue(object2 instanceof FileExtractor);
     }
+
 }

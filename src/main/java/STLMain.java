@@ -3,7 +3,6 @@ import com.google.inject.Injector;
 import config.AppConfig;
 import config.AppLoader;
 import config.PipelineConfig;
-import module.LoaderModule;
 import extract.FileExtractor;
 import extract.parser.STLParser;
 import factory.AnalysisFactory;
@@ -14,9 +13,8 @@ import factory.guice.GuiceLoaderFactory;
 import factory.singletonFactory.ComponentAreaFactory;
 import factory.singletonFactory.DistanceMetricFactory;
 import load.FileOutLoader;
-import load.ILoader;
 import load.StandardOutLoader;
-import statistics.IAnalysis;
+import module.LoaderModule;
 import statistics.area.SurfaceAreaAnalysis;
 import statistics.area.componentArea.FacetArea;
 import statistics.area.componentArea.IComponentArea;
@@ -34,6 +32,7 @@ import java.util.Map;
 
 public class STLMain {
 
+    @SuppressWarnings("Duplicates")
     public static void main(String... args){
 
         Map<String, Class> extractorMap = new HashMap<>();
@@ -76,33 +75,33 @@ public class STLMain {
 
         List<Pipeline> pipelines = new ArrayList<>();
         for (PipelineConfig pipelineConfig : appConfig.getPipelineConfigs()) {
-            Pipeline pipeline = new Pipeline();
-            pipeline.setName(pipelineConfig.getPipelineName());
-
-            //Deep Copies
-            String extract = pipelineConfig.getExtractType();
-            pipeline.setExtractor(extractorFactory.getExtractor(extract));
-            pipeline.setExtractorConf(pipelineConfig.getExtractConfiguration());
-
-            String parserName = pipelineConfig.getParseFormat();
-            pipeline.setParser(parserFactory.getAbstractParser(parserName));
-
-            List<IAnalysis> analyses = new ArrayList<>();
-            for (String statistic : pipelineConfig.getStatistics()) {
-                analyses.add(analysisFactory.getAnalysis(statistic));
-            }
-            pipeline.setStatistics(analyses);
-
-            pipeline.setStatsConf(pipelineConfig.getStatisticsConf());
-
-            Map<String, ILoader> loaders = new HashMap<>();
-            for (String loaderName : pipelineConfig.getLoadType()) {
-                loaders.put(loaderName, loaderFactory.getLoader(loaderName));
-            }
-            pipeline.setLoaders(loaders);
-
-            pipeline.setLoadConfiguration(pipelineConfig.getLoadConf());
-            pipelines.add(pipeline);
+//            Pipeline pipeline = new Pipeline();
+//            pipeline.setName(pipelineConfig.getPipelineName());
+//
+//            //Deep Copies
+//            String extract = pipelineConfig.getExtractType();
+//            pipeline.setExtractor(extractorFactory.getExtractor(extract));
+//            pipeline.setExtractorConf(pipelineConfig.getExtractConfiguration());
+//
+//            String parserName = pipelineConfig.getParseFormat();
+//            pipeline.setParser(parserFactory.getAbstractParser(parserName));
+//
+//            List<IAnalysis> analyses = new ArrayList<>();
+//            for (String statistic : pipelineConfig.getStatistics()) {
+//                analyses.add(analysisFactory.getAnalysis(statistic));
+//            }
+//            pipeline.setStatistics(analyses);
+//
+//            pipeline.setStatsConf(pipelineConfig.getStatisticsConf());
+//
+//            Map<String, ILoader> loaders = new HashMap<>();
+//            for (String loaderName : pipelineConfig.getLoadType()) {
+//                loaders.put(loaderName, loaderFactory.getLoader(loaderName));
+//            }
+//            pipeline.setLoaders(loaders);
+//
+//            pipeline.setLoadConfiguration(pipelineConfig.getLoadConf());
+//            pipelines.add(pipeline);
         }
 
         //pipelines.forEach(x -> System.out.println(x.toString()));

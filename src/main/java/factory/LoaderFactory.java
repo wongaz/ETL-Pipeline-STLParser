@@ -10,6 +10,9 @@ public class LoaderFactory {
 
     private Map<String, Class> classMap;
 
+    public LoaderFactory() {
+
+    }
 
     public LoaderFactory(Map<String, Class> map) {
         classMap = map;

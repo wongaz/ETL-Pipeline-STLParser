@@ -1,5 +1,6 @@
 package factory.guice;
 
+import factory.LoaderFactory;
 import factory.ReflectionUtil;
 import load.ILoader;
 import lombok.ToString;
@@ -8,7 +9,7 @@ import javax.inject.Inject;
 import java.util.Map;
 
 @ToString
-public class GuiceLoaderFactory {
+public class GuiceLoaderFactory extends LoaderFactory {
 
     private Map<String, ILoader> classMap;
 
@@ -17,6 +18,7 @@ public class GuiceLoaderFactory {
         this.classMap = map;
     }
 
+    @Override
     public ILoader getLoader(String loaderName) throws NullPointerException {
         ILoader loader = classMap.get(loaderName);
         if (loader == null) {

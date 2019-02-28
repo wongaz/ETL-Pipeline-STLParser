@@ -2,13 +2,14 @@ package factory.guice;
 
 import com.google.inject.Inject;
 import extract.parser.AbstractParser;
+import factory.ParserFactory;
 import factory.ReflectionUtil;
-import lombok.Data;
+import lombok.ToString;
 
 import java.util.Map;
 
-@Data
-public class GuiceParserFactory {
+@ToString
+public class GuiceParserFactory extends ParserFactory {
     private Map<String, AbstractParser> classMap;
 
     @Inject
@@ -16,6 +17,7 @@ public class GuiceParserFactory {
         classMap = map;
     }
 
+    @Override
     public AbstractParser getAbstractParser(String parserName) throws NullPointerException {
         AbstractParser parser = classMap.get(parserName);
         if (parser == null) {
