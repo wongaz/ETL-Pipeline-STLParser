@@ -1,11 +1,10 @@
 package factory.singletonFactory;
 
-import com.google.inject.Singleton;
+
 import statistics.area.componentArea.distanceMetric.IMetric;
 
 import java.util.Map;
 
-@Singleton
 public class DistanceMetricFactory {
     private static Map<String, IMetric> classMap;
     private static DistanceMetricFactory factory = new DistanceMetricFactory();

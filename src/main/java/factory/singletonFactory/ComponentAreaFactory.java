@@ -21,7 +21,7 @@ public class ComponentAreaFactory {
         classMap = map;
     }
 
-    public static int getClassMapSize() {
+    public int getClassMapSize() {
         return classMap.size();
     }
 

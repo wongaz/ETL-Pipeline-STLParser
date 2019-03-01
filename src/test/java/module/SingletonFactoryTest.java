@@ -2,6 +2,7 @@ package module;
 
 import factory.singletonFactory.ComponentAreaFactory;
 import factory.singletonFactory.DistanceMetricFactory;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import statistics.area.componentArea.FacetArea;
@@ -32,8 +33,30 @@ public class SingletonFactoryTest {
     }
 
     @Test
-    public void getMetricFactory() {
+    public void getMetricFactoryTest() {
         DistanceMetricFactory distanceMetricFactory = DistanceMetricFactory.getInstance();
+        Assert.assertEquals(3, distanceMetricFactory.getClassMapSize());
+    }
+
+    @Test
+    public void getMetricFactoryFromMapTest() {
+        DistanceMetricFactory distanceMetricFactory = DistanceMetricFactory.getInstance();
+        Assert.assertEquals(3, distanceMetricFactory.getClassMapSize());
+
+        Assert.assertTrue(distanceMetricFactory.getMetric("manhattan") instanceof ManhattanDistance);
+        Assert.assertTrue(distanceMetricFactory.getMetric("euclidean") instanceof EuclideanDistance);
+        Assert.assertTrue(distanceMetricFactory.getMetric("supremum") instanceof SupremumDistance);
+
+    }
+
+
+    @Test
+    public void getComponentFactory() {
+        ComponentAreaFactory componentAreaFactory = ComponentAreaFactory.getInstance();
+        Assert.assertEquals(1, componentAreaFactory.getClassMapSize());
+
+        Assert.assertTrue(componentAreaFactory.getComponentArea("facet") instanceof FacetArea);
+
     }
 
 

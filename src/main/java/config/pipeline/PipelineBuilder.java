@@ -6,7 +6,6 @@ import factory.ExtractorFactory;
 import factory.LoaderFactory;
 import factory.ParserFactory;
 import load.ILoader;
-import lombok.Data;
 import statistics.IAnalysis;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Data
 public class PipelineBuilder {
     private AnalysisFactory analysisFactory;
     private ExtractorFactory extractorFactory;
