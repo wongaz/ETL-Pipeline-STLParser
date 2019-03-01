@@ -6,8 +6,9 @@ pipelineConfigs:
       file: STLFiles/simple.stl
     parseFormat: stl
     statistics:
-      - box
+      - count
     statisticsConf:
       metric: euclidean
     loadType:
       - stdout
+    loadConf:

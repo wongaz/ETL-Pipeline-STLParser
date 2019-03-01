@@ -21,7 +21,9 @@ public class GuiceParserFactory extends ParserFactory {
     public AbstractParser getAbstractParser(String parserName) throws NullPointerException {
         AbstractParser parser = classMap.get(parserName);
         if (parser == null) {
-            throw new NullPointerException();
+            NullPointerException ex = new NullPointerException();
+            ex.printStackTrace();
+            throw ex;
         }
         Object obj = ReflectionUtil.makeObject(parser.getClass());
         if (obj != null) {

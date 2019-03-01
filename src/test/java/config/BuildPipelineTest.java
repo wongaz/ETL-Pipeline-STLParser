@@ -78,16 +78,45 @@ public class BuildPipelineTest {
 
         Pipeline first = pipelines.get(0);
         Assert.assertEquals("moon", first.getName());
+        Assert.assertEquals(1, first.getExtractorConf().size());
         Assert.assertEquals(3, first.getStatistics().size());
+        Assert.assertEquals(2, first.getLoaders().size());
     }
 
     @Test
     public void sampleConfigBuildTest() {
+        List<Pipeline> pipelines = new ArrayList<>();
+        for (PipelineConfig pipelineConfig : sampleConfig.getPipelineConfigs()) {
+            pipelines.add(pipelineBuilder.build(pipelineConfig));
+        }
+        Assert.assertEquals(1, pipelines.size());
+
+        Pipeline first = pipelines.get(0);
+        Assert.assertEquals("simple", first.getName());
+        Assert.assertEquals(1, first.getExtractorConf().size());
+        Assert.assertEquals(1, first.getStatistics().size());
+        Assert.assertEquals(1, first.getLoaders().size());
 
     }
 
     @Test
     public void nPipelineBuildTest() {
+        List<Pipeline> pipelines = new ArrayList<>();
+        for (PipelineConfig pipelineConfig : nPipeConfig.getPipelineConfigs()) {
+            pipelines.add(pipelineBuilder.build(pipelineConfig));
+        }
+        Assert.assertEquals(2, pipelines.size());
 
+        Pipeline first = pipelines.get(0);
+        Assert.assertEquals("moon", first.getName());
+        Assert.assertEquals(1, first.getExtractorConf().size());
+        Assert.assertEquals(2, first.getStatistics().size());
+        Assert.assertEquals(1, first.getLoaders().size());
+
+        Pipeline second = pipelines.get(1);
+        Assert.assertEquals("simple", second.getName());
+        Assert.assertEquals(1, second.getExtractorConf().size());
+        Assert.assertEquals(3, second.getStatistics().size());
+        Assert.assertEquals(2, second.getLoaders().size());
     }
 }

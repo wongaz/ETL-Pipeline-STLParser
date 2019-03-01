@@ -54,8 +54,11 @@ public class PipelineBuilder {
             loaders.put(loaderName, loaderFactory.getLoader(loaderName));
         }
         pipeline.setLoaders(loaders);
-
-        pipeline.setLoadConfiguration(config.getLoadConf());
+        if (config.getLoadConf() != null) {
+            pipeline.setLoadConfiguration(config.getLoadConf());
+        } else {
+            pipeline.setLoadConfiguration(new HashMap<String, Map<String, String>>());
+        }
         return pipeline;
 
     }
