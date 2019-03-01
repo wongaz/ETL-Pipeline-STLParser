@@ -5,8 +5,6 @@ import com.google.inject.Injector;
 import config.AppConfig;
 import config.AppLoader;
 import config.PipelineConfig;
-import config.pipeline.Pipeline;
-import config.pipeline.PipelineBuilder;
 import factory.AnalysisFactory;
 import factory.ExtractorFactory;
 import factory.LoaderFactory;
@@ -23,6 +21,8 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import pipeline.Pipeline;
+import pipeline.PipelineBuilder;
 
 import java.io.InputStream;
 import java.util.ArrayList;

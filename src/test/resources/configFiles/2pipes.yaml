@@ -8,6 +8,7 @@ pipelineConfigs:
     statistics:
       - count
       - box
+      - area
     statisticsConf:
       metric: euclidean
     loadType:
@@ -29,7 +30,6 @@ pipelineConfigs:
       metric: euclidean
     loadType:
       - stdout
-      - file
     loadConf:
       file:
         filename: stloutput.txt

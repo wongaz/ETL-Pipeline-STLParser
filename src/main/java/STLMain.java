@@ -3,11 +3,22 @@ import com.google.inject.Injector;
 import config.AppConfig;
 import config.AppLoader;
 import config.PipelineConfig;
-import config.pipeline.Pipeline;
+import factory.AnalysisFactory;
+import factory.ExtractorFactory;
+import factory.LoaderFactory;
+import factory.ParserFactory;
+import factory.guice.GuiceAnalysisFactory;
+import factory.guice.GuiceExtractorFactory;
 import factory.guice.GuiceLoaderFactory;
+import factory.guice.GuiceParserFactory;
 import factory.singletonFactory.ComponentAreaFactory;
 import factory.singletonFactory.DistanceMetricFactory;
+import module.AnalysisModule;
+import module.ExtractorModule;
 import module.LoaderModule;
+import module.ParserModule;
+import pipeline.Pipeline;
+import pipeline.PipelineBuilder;
 import statistics.area.componentArea.FacetArea;
 import statistics.area.componentArea.IComponentArea;
 import statistics.area.componentArea.distanceMetric.EuclideanDistance;
@@ -25,25 +36,6 @@ public class STLMain {
     @SuppressWarnings("Duplicates")
     public static void main(String... args){
 
-//        Map<String, Class> extractorMap = new HashMap<>();
-//        extractorMap.put("file", FileExtractor.class);
-//        ExtractorFactory extractorFactory = new ExtractorFactory(extractorMap);
-//
-//        Map<String, Class> parserMap = new HashMap<>();
-//        parserMap.put("STL", STLParser.class);
-//        ParserFactory parserFactory = new ParserFactory(parserMap);
-//
-//        Map<String, Class> analysisMap = new HashMap<>();
-//        analysisMap.put("count", SurfaceAreaAnalysis.class);
-//        analysisMap.put("box", BoxAnalysis.class);
-//        analysisMap.put("area", CountAnalysis.class);
-//        AnalysisFactory analysisFactory = new AnalysisFactory(analysisMap);
-//
-//        Map<String, Class> loaderMap = new HashMap<>();
-//        loaderMap.put("stdout", StandardOutLoader.class);
-//        loaderMap.put("file", FileOutLoader.class);
-//        LoaderFactory loaderFactory = new LoaderFactory(loaderMap);
-
         Map<String, IMetric> metricMap = new HashMap<>();
         metricMap.put("manhattan", new ManhattanDistance());
         metricMap.put("euclidean", new EuclideanDistance());
@@ -55,43 +47,31 @@ public class STLMain {
         componentMap.put("facet", new FacetArea());
         ComponentAreaFactory.getInstance().setClassMap(componentMap);
 
-        Injector injector = Guice.createInjector(new LoaderModule());
-        GuiceLoaderFactory guiceLoaderFactory = injector.getInstance(GuiceLoaderFactory.class);
 
-        String conf = "configFiles/moon.yaml";
+        Injector analysisInjector = Guice.createInjector(new AnalysisModule());
+        AnalysisFactory analysisFactory = analysisInjector.getInstance(GuiceAnalysisFactory.class);
+
+        Injector extractorInjector = Guice.createInjector(new ExtractorModule());
+        ExtractorFactory extractorFactory = extractorInjector.getInstance(GuiceExtractorFactory.class);
+
+        Injector loaderInjector = Guice.createInjector(new LoaderModule());
+        LoaderFactory loaderFactory = loaderInjector.getInstance(GuiceLoaderFactory.class);
+
+        Injector parserInjector = Guice.createInjector(new ParserModule());
+        ParserFactory parserFactory = parserInjector.getInstance(GuiceParserFactory.class);
+
+        PipelineBuilder pipelineBuilder =
+                new PipelineBuilder(analysisFactory, extractorFactory, loaderFactory, parserFactory);
+
+        //String conf = "configFiles/moon.yaml";
+        String conf = args[1];
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);
         //System.out.println(appConfig);
 
         List<Pipeline> pipelines = new ArrayList<>();
         for (PipelineConfig pipelineConfig : appConfig.getPipelineConfigs()) {
-//            config.pipeline.Pipeline config.pipeline = new config.pipeline.Pipeline();
-//            config.pipeline.setName(pipelineConfig.getPipelineName());
-//
-//            //Deep Copies
-//            String extract = pipelineConfig.getExtractType();
-//            config.pipeline.setExtractor(extractorFactory.getExtractor(extract));
-//            config.pipeline.setExtractorConf(pipelineConfig.getExtractConfiguration());
-//
-//            String parserName = pipelineConfig.getParseFormat();
-//            config.pipeline.setParser(parserFactory.getAbstractParser(parserName));
-//
-//            List<IAnalysis> analyses = new ArrayList<>();
-//            for (String statistic : pipelineConfig.getStatistics()) {
-//                analyses.add(analysisFactory.getAnalysis(statistic));
-//            }
-//            config.pipeline.setStatistics(analyses);
-//
-//            config.pipeline.setStatsConf(pipelineConfig.getStatisticsConf());
-//
-//            Map<String, ILoader> loaders = new HashMap<>();
-//            for (String loaderName : pipelineConfig.getLoadType()) {
-//                loaders.put(loaderName, loaderFactory.getLoader(loaderName));
-//            }
-//            config.pipeline.setLoaders(loaders);
-//
-//            config.pipeline.setLoadConfiguration(pipelineConfig.getLoadConf());
-//            pipelines.add(config.pipeline);
+            pipelines.add(pipelineBuilder.build(pipelineConfig));
         }
 
         //pipelines.forEach(x -> System.out.println(x.toString()));

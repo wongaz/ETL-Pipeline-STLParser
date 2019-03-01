@@ -1,4 +1,4 @@
-package config.pipeline;
+package pipeline;
 
 import config.PipelineConfig;
 import factory.AnalysisFactory;

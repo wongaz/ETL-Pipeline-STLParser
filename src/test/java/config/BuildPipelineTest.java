@@ -2,8 +2,6 @@ package config;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import config.pipeline.Pipeline;
-import config.pipeline.PipelineBuilder;
 import factory.AnalysisFactory;
 import factory.ExtractorFactory;
 import factory.LoaderFactory;
@@ -19,6 +17,8 @@ import module.ParserModule;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import pipeline.Pipeline;
+import pipeline.PipelineBuilder;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -110,13 +110,13 @@ public class BuildPipelineTest {
         Pipeline first = pipelines.get(0);
         Assert.assertEquals("moon", first.getName());
         Assert.assertEquals(1, first.getExtractorConf().size());
-        Assert.assertEquals(2, first.getStatistics().size());
+        Assert.assertEquals(3, first.getStatistics().size());
         Assert.assertEquals(1, first.getLoaders().size());
 
         Pipeline second = pipelines.get(1);
         Assert.assertEquals("simple", second.getName());
         Assert.assertEquals(1, second.getExtractorConf().size());
         Assert.assertEquals(3, second.getStatistics().size());
-        Assert.assertEquals(2, second.getLoaders().size());
+        Assert.assertEquals(1, second.getLoaders().size());
     }
 }
