@@ -4,7 +4,7 @@ pipelineConfigs:
     extractType: file
     extractConfiguration:
       file: STLFiles/Moon.stl
-    parseFormat: STL
+    parseFormat: stl
     statistics:
       - count
       - box

@@ -3,27 +3,17 @@ import com.google.inject.Injector;
 import config.AppConfig;
 import config.AppLoader;
 import config.PipelineConfig;
-import extract.FileExtractor;
-import extract.parser.STLParser;
-import factory.AnalysisFactory;
-import factory.ExtractorFactory;
-import factory.LoaderFactory;
-import factory.ParserFactory;
+import config.pipeline.Pipeline;
 import factory.guice.GuiceLoaderFactory;
 import factory.singletonFactory.ComponentAreaFactory;
 import factory.singletonFactory.DistanceMetricFactory;
-import load.FileOutLoader;
-import load.StandardOutLoader;
 import module.LoaderModule;
-import statistics.area.SurfaceAreaAnalysis;
 import statistics.area.componentArea.FacetArea;
 import statistics.area.componentArea.IComponentArea;
 import statistics.area.componentArea.distanceMetric.EuclideanDistance;
 import statistics.area.componentArea.distanceMetric.IMetric;
 import statistics.area.componentArea.distanceMetric.ManhattanDistance;
 import statistics.area.componentArea.distanceMetric.SupremumDistance;
-import statistics.box.BoxAnalysis;
-import statistics.count.CountAnalysis;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,24 +25,24 @@ public class STLMain {
     @SuppressWarnings("Duplicates")
     public static void main(String... args){
 
-        Map<String, Class> extractorMap = new HashMap<>();
-        extractorMap.put("file", FileExtractor.class);
-        ExtractorFactory extractorFactory = new ExtractorFactory(extractorMap);
-
-        Map<String, Class> parserMap = new HashMap<>();
-        parserMap.put("STL", STLParser.class);
-        ParserFactory parserFactory = new ParserFactory(parserMap);
-
-        Map<String, Class> analysisMap = new HashMap<>();
-        analysisMap.put("count", SurfaceAreaAnalysis.class);
-        analysisMap.put("box", BoxAnalysis.class);
-        analysisMap.put("area", CountAnalysis.class);
-        AnalysisFactory analysisFactory = new AnalysisFactory(analysisMap);
-
-        Map<String, Class> loaderMap = new HashMap<>();
-        loaderMap.put("stdout", StandardOutLoader.class);
-        loaderMap.put("file", FileOutLoader.class);
-        LoaderFactory loaderFactory = new LoaderFactory(loaderMap);
+//        Map<String, Class> extractorMap = new HashMap<>();
+//        extractorMap.put("file", FileExtractor.class);
+//        ExtractorFactory extractorFactory = new ExtractorFactory(extractorMap);
+//
+//        Map<String, Class> parserMap = new HashMap<>();
+//        parserMap.put("STL", STLParser.class);
+//        ParserFactory parserFactory = new ParserFactory(parserMap);
+//
+//        Map<String, Class> analysisMap = new HashMap<>();
+//        analysisMap.put("count", SurfaceAreaAnalysis.class);
+//        analysisMap.put("box", BoxAnalysis.class);
+//        analysisMap.put("area", CountAnalysis.class);
+//        AnalysisFactory analysisFactory = new AnalysisFactory(analysisMap);
+//
+//        Map<String, Class> loaderMap = new HashMap<>();
+//        loaderMap.put("stdout", StandardOutLoader.class);
+//        loaderMap.put("file", FileOutLoader.class);
+//        LoaderFactory loaderFactory = new LoaderFactory(loaderMap);
 
         Map<String, IMetric> metricMap = new HashMap<>();
         metricMap.put("manhattan", new ManhattanDistance());
@@ -75,33 +65,33 @@ public class STLMain {
 
         List<Pipeline> pipelines = new ArrayList<>();
         for (PipelineConfig pipelineConfig : appConfig.getPipelineConfigs()) {
-//            Pipeline pipeline = new Pipeline();
-//            pipeline.setName(pipelineConfig.getPipelineName());
+//            config.pipeline.Pipeline config.pipeline = new config.pipeline.Pipeline();
+//            config.pipeline.setName(pipelineConfig.getPipelineName());
 //
 //            //Deep Copies
 //            String extract = pipelineConfig.getExtractType();
-//            pipeline.setExtractor(extractorFactory.getExtractor(extract));
-//            pipeline.setExtractorConf(pipelineConfig.getExtractConfiguration());
+//            config.pipeline.setExtractor(extractorFactory.getExtractor(extract));
+//            config.pipeline.setExtractorConf(pipelineConfig.getExtractConfiguration());
 //
 //            String parserName = pipelineConfig.getParseFormat();
-//            pipeline.setParser(parserFactory.getAbstractParser(parserName));
+//            config.pipeline.setParser(parserFactory.getAbstractParser(parserName));
 //
 //            List<IAnalysis> analyses = new ArrayList<>();
 //            for (String statistic : pipelineConfig.getStatistics()) {
 //                analyses.add(analysisFactory.getAnalysis(statistic));
 //            }
-//            pipeline.setStatistics(analyses);
+//            config.pipeline.setStatistics(analyses);
 //
-//            pipeline.setStatsConf(pipelineConfig.getStatisticsConf());
+//            config.pipeline.setStatsConf(pipelineConfig.getStatisticsConf());
 //
 //            Map<String, ILoader> loaders = new HashMap<>();
 //            for (String loaderName : pipelineConfig.getLoadType()) {
 //                loaders.put(loaderName, loaderFactory.getLoader(loaderName));
 //            }
-//            pipeline.setLoaders(loaders);
+//            config.pipeline.setLoaders(loaders);
 //
-//            pipeline.setLoadConfiguration(pipelineConfig.getLoadConf());
-//            pipelines.add(pipeline);
+//            config.pipeline.setLoadConfiguration(pipelineConfig.getLoadConf());
+//            pipelines.add(config.pipeline);
         }
 
         //pipelines.forEach(x -> System.out.println(x.toString()));

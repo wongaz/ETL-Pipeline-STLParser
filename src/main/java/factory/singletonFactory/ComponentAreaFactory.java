@@ -1,14 +1,16 @@
 package factory.singletonFactory;
 
+import com.google.inject.Singleton;
 import statistics.area.componentArea.IComponentArea;
 
 import java.util.Map;
 
+@Singleton
 public class ComponentAreaFactory {
     private static Map<String, IComponentArea> classMap;
-    private static ComponentAreaFactory factory;
+    private static ComponentAreaFactory factory = new ComponentAreaFactory();
 
-    public static ComponentAreaFactory getInstance() {
+    public synchronized static ComponentAreaFactory getInstance() {
         if (factory == null)
             factory = new ComponentAreaFactory();
 
@@ -17,6 +19,10 @@ public class ComponentAreaFactory {
 
     public void setClassMap(Map<String, IComponentArea> map) {
         classMap = map;
+    }
+
+    public static int getClassMapSize() {
+        return classMap.size();
     }
 
     public IComponentArea getComponentArea(String componentName) {

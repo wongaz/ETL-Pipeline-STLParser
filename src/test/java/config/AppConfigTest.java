@@ -65,8 +65,8 @@ public class AppConfigTest {
 
     @Test
     public void testParseFormat() {
-        Assert.assertEquals("STL", moonPipeline.getParseFormat());
-        Assert.assertEquals("STL", samplePipeline.getParseFormat());
+        Assert.assertEquals("stl", moonPipeline.getParseFormat());
+        Assert.assertEquals("stl", samplePipeline.getParseFormat());
     }
 
 

@@ -22,7 +22,7 @@ pipelineConfigs:
     extractType: file
     extractConfiguration:
       file: STLFiles/simple.stl
-    parseFormat: STL
+    parseFormat: stl
     statistics:
       - count
       - box

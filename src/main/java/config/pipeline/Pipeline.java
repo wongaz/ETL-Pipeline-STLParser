@@ -1,3 +1,5 @@
+package config.pipeline;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import extract.AbstractExtractor;
@@ -13,6 +15,7 @@ import java.util.Map;
 
 @Data
 public class Pipeline {
+    private int phase = 0;
     private String name;
     private AbstractExtractor extractor;
     private Map<String, String> extractorConf;
@@ -24,11 +27,14 @@ public class Pipeline {
     private Model model;
 
 
-    private void extract() {
-        this.extractor.setExtractionMap(this.extractorConf);
-        this.extractor.setParser(parser);
-        this.extractor.read();
-        this.model = this.extractor.getModel();
+    public void extract() {
+        if (phase == 0) {
+            this.extractor.setExtractionMap(this.extractorConf);
+            this.extractor.setParser(parser);
+            this.extractor.read();
+            this.model = this.extractor.getModel();
+            phase++;
+        }
     }
 
     private void toGson() {
@@ -46,20 +52,26 @@ public class Pipeline {
 
     }
 
-    private void transform() {
-        statistics.forEach(x -> {
-            Pair<String, ?> tuple = x.runAnalysis(this.model, this.statsConf);
-            this.model.addAnalysis(tuple.getLeft(), tuple.getRight());
-        });
+    public void transform() {
+        if (phase == 1) {
+            statistics.forEach(x -> {
+                Pair<String, ?> tuple = x.runAnalysis(this.model, this.statsConf);
+                this.model.addAnalysis(tuple.getLeft(), tuple.getRight());
+            });
+            phase++;
+        }
     }
 
-    private void load() {
-        this.loaders.entrySet().forEach(x -> {
-            Map<String, String> loadConf = this.loadConfiguration.get(x.getKey());
-            ILoader currentLoader = x.getValue();
-            currentLoader.setOutConfigurations(loadConf);
-            currentLoader.load(this.model);
-        });
+    public void load() {
+        if (phase == 2) {
+            this.loaders.entrySet().forEach(x -> {
+                Map<String, String> loadConf = this.loadConfiguration.get(x.getKey());
+                ILoader currentLoader = x.getValue();
+                currentLoader.setOutConfigurations(loadConf);
+                currentLoader.load(this.model);
+            });
+            phase++;
+        }
 
     }
 

@@ -1,3 +1,5 @@
+package config.pipeline;
+
 import config.PipelineConfig;
 import factory.AnalysisFactory;
 import factory.ExtractorFactory;
@@ -18,6 +20,14 @@ public class PipelineBuilder {
     private ExtractorFactory extractorFactory;
     private LoaderFactory loaderFactory;
     private ParserFactory parserFactory;
+
+    public PipelineBuilder(AnalysisFactory analysisFactory, ExtractorFactory extractorFactory, LoaderFactory loaderFactory,
+                           ParserFactory parserFactory) {
+        this.analysisFactory = analysisFactory;
+        this.extractorFactory = extractorFactory;
+        this.loaderFactory = loaderFactory;
+        this.parserFactory = parserFactory;
+    }
 
     public Pipeline build(PipelineConfig config) {
         Pipeline pipeline = new Pipeline();
