@@ -17,7 +17,7 @@ public class AnalysisFactory {
     }
 
     public IAnalysis getAnalysis(String analysisName) throws NullPointerException {
-        Object obj = ReflectionUtil.makeObject(analysisName, classMap);
+        Object obj = FactoryReflectionUtil.makeObject(analysisName, classMap);
         if (obj != null) {
             return (IAnalysis) obj;
         }

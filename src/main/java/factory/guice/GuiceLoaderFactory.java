@@ -1,7 +1,7 @@
 package factory.guice;
 
+import factory.FactoryReflectionUtil;
 import factory.LoaderFactory;
-import factory.ReflectionUtil;
 import load.ILoader;
 import lombok.ToString;
 
@@ -24,7 +24,7 @@ public class GuiceLoaderFactory extends LoaderFactory {
         if (loader == null) {
             throw new NullPointerException();
         }
-        Object obj = ReflectionUtil.makeObject(loader.getClass());
+        Object obj = FactoryReflectionUtil.makeObject(loader.getClass());
         if (obj != null) {
             return (ILoader) obj;
         }

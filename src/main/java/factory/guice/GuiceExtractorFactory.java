@@ -3,7 +3,7 @@ package factory.guice;
 import com.google.inject.Inject;
 import extract.AbstractExtractor;
 import factory.ExtractorFactory;
-import factory.ReflectionUtil;
+import factory.FactoryReflectionUtil;
 import lombok.ToString;
 
 import java.util.Map;
@@ -24,7 +24,7 @@ public class GuiceExtractorFactory extends ExtractorFactory {
         if (extractor == null) {
             throw new NullPointerException();
         }
-        Object obj = ReflectionUtil.makeObject(extractor.getClass());
+        Object obj = FactoryReflectionUtil.makeObject(extractor.getClass());
         if (obj != null) {
             return (AbstractExtractor) obj;
         }

@@ -19,7 +19,7 @@ public class LoaderFactory {
     }
 
     public ILoader getLoader(String loader) {
-        Object obj = ReflectionUtil.makeObject(loader, classMap);
+        Object obj = FactoryReflectionUtil.makeObject(loader, classMap);
         if (obj != null) {
             return (ILoader) obj;
         }

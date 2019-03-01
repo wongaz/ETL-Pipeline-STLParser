@@ -3,7 +3,7 @@ package factory;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-public class ReflectionUtil {
+public class FactoryReflectionUtil {
     public static Object makeObject(String name, Map<String, Class> ClassMap) throws NullPointerException {
         Class<?> cls = ClassMap.get(name);
         if (cls == null) throw new NullPointerException();

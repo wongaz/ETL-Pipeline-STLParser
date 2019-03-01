@@ -64,7 +64,11 @@ public class STLMain {
                 new PipelineBuilder(analysisFactory, extractorFactory, loaderFactory, parserFactory);
 
         //String conf = "configFiles/moon.yaml";
-        String conf = args[1];
+        if (args.length == 0) {
+            System.out.println("Please Supply at least 1 Config YAML to run pipeline");
+            System.exit(1);
+        }
+        String conf = args[0];
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);
         //System.out.println(appConfig);
@@ -74,7 +78,6 @@ public class STLMain {
             pipelines.add(pipelineBuilder.build(pipelineConfig));
         }
 
-        //pipelines.forEach(x -> System.out.println(x.toString()));
         pipelines.forEach(Pipeline::runPipeline);
     }
 }

@@ -2,8 +2,8 @@ package factory.guice;
 
 import com.google.inject.Inject;
 import extract.parser.AbstractParser;
+import factory.FactoryReflectionUtil;
 import factory.ParserFactory;
-import factory.ReflectionUtil;
 import lombok.ToString;
 
 import java.util.Map;
@@ -25,7 +25,7 @@ public class GuiceParserFactory extends ParserFactory {
             ex.printStackTrace();
             throw ex;
         }
-        Object obj = ReflectionUtil.makeObject(parser.getClass());
+        Object obj = FactoryReflectionUtil.makeObject(parser.getClass());
         if (obj != null) {
             return (AbstractParser) obj;
         }

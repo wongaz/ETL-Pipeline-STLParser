@@ -2,7 +2,7 @@ package factory.guice;
 
 import com.google.inject.Inject;
 import factory.AnalysisFactory;
-import factory.ReflectionUtil;
+import factory.FactoryReflectionUtil;
 import lombok.ToString;
 import statistics.IAnalysis;
 
@@ -25,7 +25,7 @@ public class GuiceAnalysisFactory extends AnalysisFactory {
             throw new NullPointerException();
         }
 
-        Object obj = ReflectionUtil.makeObject(analysis.getClass());
+        Object obj = FactoryReflectionUtil.makeObject(analysis.getClass());
         if (obj != null) {
             return (IAnalysis) obj;
         }

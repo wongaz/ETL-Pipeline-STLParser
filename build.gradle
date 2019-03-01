@@ -37,7 +37,11 @@ task fatJar(type: Jar) {
         attributes('Implementation-Version': version,
                     'Main-Class': 'STLMain')
     }
-    baseName = project.name + '-all'
+    baseName = project.name + '-Uber'
+    destinationDir = rootDir
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
+
+
+
 }

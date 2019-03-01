@@ -15,7 +15,7 @@ public class ExtractorFactory {
     }
 
     public AbstractExtractor getExtractor(String extractorName) {
-        Object obj = ReflectionUtil.makeObject(extractorName, classMap);
+        Object obj = FactoryReflectionUtil.makeObject(extractorName, classMap);
         if (obj != null) {
             return (AbstractExtractor) obj;
         }
