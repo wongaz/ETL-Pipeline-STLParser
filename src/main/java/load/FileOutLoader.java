@@ -34,6 +34,12 @@ public class FileOutLoader implements ILoader {
 
     }
 
+    /**
+     * The incoming map needs to have the following
+     * filename: <output_file>
+     *
+     * @param confMap
+     */
     @Override
     public void setOutConfigurations(Map<String, String> confMap) {
         fileName = confMap.get("filename");

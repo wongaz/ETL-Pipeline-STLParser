@@ -12,6 +12,14 @@ import java.util.Map;
 public class SurfaceAreaAnalysis implements IAnalysis {
 
 
+    /**
+     * This is the only Analysis that requeires the extra map but if non is provided it will
+     * just assume "euclidean" distance
+     *
+     * @param model
+     * @param statisticsConf
+     * @return
+     */
     @Override
     public Pair<String, Object> runAnalysis(Model model, Map<String, String> statisticsConf) {
         String metric = statisticsConf.get("metric");

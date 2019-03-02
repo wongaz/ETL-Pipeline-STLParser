@@ -50,6 +50,8 @@ The config YAML files are designed have the following components. If the param i
 - loadConf
     - extra rules for the loaders. 
     
+ 
+    
 It is important to note that for design choices the loadType has to align with the keys for the loadConf. 
 All the configurations are implementations specific. In that case, the implementation pulls out the appropriate 
 information from the configuration maps.

@@ -35,6 +35,9 @@ import java.util.Map;
 
 public class STLMain {
 
+    /**
+     * I got a bunch of JVM warnings so this disables them.
+     */
     public static void disableAccessWarnings() {
         try {
             Class unsafeClass = Class.forName("sun.misc.Unsafe");
@@ -57,6 +60,11 @@ public class STLMain {
     public static void main(String... args){
 
         disableAccessWarnings();
+
+        if (args.length == 0) {
+            System.out.println("Please Supply at least 1 Config YAML to run pipeline");
+            System.exit(1);
+        }
 
         Map<String, IMetric> metricMap = new HashMap<>();
         metricMap.put("manhattan", new ManhattanDistance());
@@ -86,14 +94,9 @@ public class STLMain {
                 new PipelineBuilder(analysisFactory, extractorFactory, loaderFactory, parserFactory);
 
         //String conf = "configFiles/moon.yaml";
-        if (args.length == 0) {
-            System.out.println("Please Supply at least 1 Config YAML to run pipeline");
-            System.exit(1);
-        }
         String conf = args[0];
 
         AppConfig appConfig = AppLoader.loadConfiguration(conf);
-        //System.out.println(appConfig);
 
         List<Pipeline> pipelines = new ArrayList<>();
         for (PipelineConfig pipelineConfig : appConfig.getPipelineConfigs()) {

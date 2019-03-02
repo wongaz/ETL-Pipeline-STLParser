@@ -20,9 +20,19 @@ public class FileExtractor extends AbstractExtractor {
         super(parser);
     }
 
+    /**
+     * For the implementation of this Extractor in the configuration map for the Extractor
+     * put
+     * file: <file path">
+     *
+     * @param extractionMap
+     */
     @Override
     public void setExtractionMap(Map<String, String> extractionMap) {
         this.relativeFileDirectory = extractionMap.get("file");
+        if (this.relativeFileDirectory == null) {
+            System.exit(1);
+        }
     }
 
     @Override
