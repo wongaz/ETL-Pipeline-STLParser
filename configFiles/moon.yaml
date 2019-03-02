@@ -9,14 +9,12 @@ pipelineConfigs:
       - count
       - box
       - area
-    statisticsConf:
-      metric: euclidean
     loadType:
       - stdout
       - file
     loadConf:
       file:
-        filename: stloutput.txt
+        filename: output/moon_stloutput.txt
   # Simple
   - pipelineName: simple
     extractType: file
@@ -34,5 +32,5 @@ pipelineConfigs:
       - file
     loadConf:
       file:
-        filename: stloutput.txt
+        filename: output/simple_stloutput.txt
 

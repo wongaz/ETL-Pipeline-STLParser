@@ -28,13 +28,25 @@ public class PipelineBuilder {
     }
 
     public Pipeline build(PipelineConfig config) {
+        if (config.getPipelineName() == null ||
+                config.getExtractType() == null ||
+                config.getParseFormat() == null ||
+                config.getStatistics() == null ||
+                config.getLoadType() == null) {
+            System.exit(1);
+        }
         Pipeline pipeline = new Pipeline();
         pipeline.setName(config.getPipelineName());
 
         //Deep Copies
         String extract = config.getExtractType();
         pipeline.setExtractor(extractorFactory.getExtractor(extract));
-        pipeline.setExtractorConf(config.getExtractConfiguration());
+
+        if (config.getExtractConfiguration() != null) {
+            pipeline.setExtractorConf(config.getExtractConfiguration());
+        } else {
+            pipeline.setExtractorConf(new HashMap<>());
+        }
 
         String parserName = config.getParseFormat();
         pipeline.setParser(parserFactory.getAbstractParser(parserName));
@@ -45,18 +57,25 @@ public class PipelineBuilder {
         }
         pipeline.setStatistics(analyses);
 
-        pipeline.setStatsConf(config.getStatisticsConf());
+        if (config.getStatisticsConf() != null) {
+            pipeline.setStatsConf(config.getStatisticsConf());
+        } else {
+            pipeline.setStatsConf(new HashMap<>());
+        }
 
         Map<String, ILoader> loaders = new HashMap<>();
         for (String loaderName : config.getLoadType()) {
             loaders.put(loaderName, loaderFactory.getLoader(loaderName));
         }
         pipeline.setLoaders(loaders);
+
         if (config.getLoadConf() != null) {
             pipeline.setLoadConfiguration(config.getLoadConf());
         } else {
             pipeline.setLoadConfiguration(new HashMap<String, Map<String, String>>());
         }
+
+
         return pipeline;
 
     }

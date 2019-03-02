@@ -1,7 +1,6 @@
 package extract;
 
 import extract.parser.AbstractParser;
-import lombok.Data;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 
-@Data
 public class FileExtractor extends AbstractExtractor {
 
     private String relativeFileDirectory;
