@@ -12,6 +12,7 @@ This system uses many different built tools to make an ETL config.pipeline
     - Extra utility and access to triples.
 - Google Guice
     - Dependency injection for easy factories
+- Gradle
 
 ## Design
 This design features the ability to have multiple different ETL pipelines with different running 
