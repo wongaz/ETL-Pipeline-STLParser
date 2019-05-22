@@ -122,30 +122,5 @@ I have been using the following command to run the project
  java -jar STLParser-Uber-1.0-SNAPSHOT.jar configFiles/moon.yaml 
 ```
 
-## Design Discussion
-Each of the components are fairly modular in their design. If more statistics are asked for then there are more 
-dependency on IAnalysis. The user would just have to use more guice binding into the factories to make sure they can be 
-injected into the pipeline. So from a design discussion I think there are points that could be simplified but given my 
-limited experience with this type of data I cannot simplify it. Therefore, I chose to make it fairly modular. 
- 
-The design decision to make individual pipes allow for the the pipes to be run in parralel of each other if necessary. 
-Since they offer a level of asynchronously execution. 
 
-I allowed for loaders and extractors to be very open ended in the design because they can accomodate either API or 
-databases reads and database writes, respectively. Just put in the conf for either case an API key or ssh key. 
 
-### Performance Discussion
-If the number of triangles grew relatively large, first I would scale vertically if feasible. That way I could maintain 
-the same design. If I knew the stl objects were relative large then I would move towards a distributed storages system. 
-In this design there would an extractor program. This would just purely extract the information and back it up to some 
-distributed system. In this case, it would be a distributed system file system consisting of serialized java objects or 
-distributed databases to be used later. This phase of the pipeline is fairly serial and cannot be parallelized effectively.
-
-After everything is sharded and the model is completed. I would convert each analysis into some form of a MapReduce procedure. 
-This will introduce job level parallelism and speed up some of the processing over millions of triangles. It would then 
-write to some database or filesystem after being reduced. 
-
-The final loader would be used to redirect the output from the reducers to their respective locations.
-
-This type of computations would be more IO intensive but that should be negligible in this case because it is computing 
-time that is more expensive in the overall runtime analysis for really large systems debatably.    
